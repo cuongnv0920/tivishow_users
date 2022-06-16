@@ -48,4 +48,25 @@
   &__icon {
     color: #00524e;
   }
+
+  &__login {
+    font-family: "Muli", sans-serif !important;
+    color: #1c2e36 !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+  }
+
+  &__menuItem {
+    font-family: "Muli", sans-serif !important;
+    color: #1c2e36 !important;
+  }
+}
+
+.dialog {
+  &__cancel {
+    font-family: "Muli", sans-serif !important;
+    color: #1c2e36 !important;
+    font-weight: 600 !important;
+  }
 }

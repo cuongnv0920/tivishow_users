@@ -54,7 +54,6 @@ function LoginForm(props) {
           type="submit"
           className="login__button"
           variant="contained"
-          color="primary"
           fullWidth
           size="large"
           disabled={isSubmitting}
