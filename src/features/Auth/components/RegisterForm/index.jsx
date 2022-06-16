@@ -70,7 +70,6 @@ function RegisterForm(props) {
           type="submit"
           className="register__button"
           variant="contained"
-          color="primary"
           fullWidth
           size="large"
           disabled={isSubmitting}
