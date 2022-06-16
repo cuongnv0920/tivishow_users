@@ -19,8 +19,9 @@ import "./styles.scss";
 Header.propTypes = {};
 
 const pages = [
-  { title: "Biên độ", href: "/amplitude" },
-  { title: "Slide", href: "/slide" },
+  { title: "Quản trị", href: "/admin", role: "admin" },
+  { title: "Biên độ", href: "/amplitude", role: "admin" },
+  { title: "Poster", href: "/poster", role: "user" },
 ];
 
 function Header(props) {
@@ -54,6 +55,8 @@ function Header(props) {
     setAnchorEl(null);
   };
 
+  const pageMenus = pages.filter((page, _) => page.role === loggedInUser.role);
+
   return (
     <div>
       <AppBar position="static" className="appbar">
@@ -64,10 +67,10 @@ function Header(props) {
             </Link>
 
             <ul className="appbar__menu menu">
-              {pages.map((page, index) => (
+              {pageMenus.map((pageMenu, index) => (
                 <li key={index} className="menu__item">
-                  <a href={page.href} className="menu__link">
-                    {page.title}
+                  <a href={pageMenu.href} className="menu__link">
+                    {pageMenu.title}
                   </a>
                 </li>
               ))}
