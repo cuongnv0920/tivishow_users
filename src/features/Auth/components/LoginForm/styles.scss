@@ -1,0 +1,27 @@
+.login {
+  position: relative;
+
+  &__progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  &__avatar {
+    margin: 5px auto;
+    background-color: #f50057 !important;
+  }
+
+  &__title {
+    margin: 16px 0 !important;
+    text-align: center;
+    font-family: "Muli", sans-serif !important;
+    font-weight: 600 !important;
+    color: #00524e;
+  }
+
+  &__button {
+    margin: 16px 0px !important;
+  }
+}

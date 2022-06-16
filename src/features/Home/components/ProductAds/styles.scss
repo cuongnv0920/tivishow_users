@@ -1,0 +1,63 @@
+.default-nav {
+  display: none !important;
+}
+
+.react-calendar {
+  border: 1px solid #daa520 !important;
+  height: 310px;
+  font-family: "Muli", sans-serif !important;
+}
+
+.calendar {
+  display: flex;
+
+  &__detail {
+    width: 125px;
+    padding: 10px 10px;
+    text-align: center;
+    background-color: #daa520;
+    color: #00524e;
+  }
+
+  &__month,
+  &__year {
+    font-family: "Muli", sans-serif !important;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  &__day {
+    padding: 65px 0;
+    font-size: 4rem;
+    font-weight: 700;
+    font-family: "Muli", sans-serif !important;
+  }
+}
+
+.poster {
+  padding-top: 20px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+
+  &__slide {
+    overflow: hidden;
+  }
+
+  &__image {
+    width: 100%;
+    height: calc(100% - 25px);
+    border-radius: 4px;
+  }
+
+  &__clock {
+    text-align: center;
+    justify-items: center;
+  }
+
+  &__chip {
+    font-family: "Muli", sans-serif !important;
+    color: #00524e !important;
+    font-size: 1.5rem !important;
+    font-weight: 600;
+  }
+}

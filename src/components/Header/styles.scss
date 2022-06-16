@@ -1,0 +1,51 @@
+.appbar {
+  background-color: #fff !important;
+  padding: 0 !important;
+
+  &__toolbar {
+    min-height: 50px !important;
+  }
+  &__link {
+    padding: 3px 5px;
+  }
+
+  &__image {
+    max-width: 100px;
+  }
+
+  .menu {
+    margin: 0;
+    padding: 0 20px;
+    flex-grow: 1;
+    display: flex;
+
+    &__item {
+      margin-left: 5px;
+      padding: 13px 20px;
+      float: left;
+      position: relative;
+      font-size: 1rem;
+      font-weight: 600;
+      border-bottom: 4px solid transparent;
+      font-family: "Muli", sans-serif !important;
+      list-style: none;
+      cursor: pointer;
+    }
+
+    &__link {
+      text-align: center;
+      text-decoration: none;
+      color: #1c2e36;
+    }
+
+    &__item:hover {
+      border-color: #00524e;
+      background-color: #f8f8f8;
+      transition: 0.3s all;
+    }
+  }
+
+  &__icon {
+    color: #00524e;
+  }
+}

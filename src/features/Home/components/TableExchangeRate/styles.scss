@@ -1,0 +1,46 @@
+.title {
+  padding: 10px 0px;
+  text-align: center;
+
+  &__table {
+    font-family: "Muli", sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 1.5rem !important;
+    padding: 0 15px;
+  }
+}
+
+.head {
+  &__cell {
+    font-family: "Muli", sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 0.9rem !important;
+    color: #00524e !important;
+    line-height: 0.5rem !important;
+    text-align: center !important;
+  }
+
+  &__cell p {
+    font-style: italic;
+  }
+}
+
+.body {
+  &__cell {
+    font-family: "Muli", sans-serif !important;
+    font-size: 0.9rem !important;
+    color: #1c2e36;
+    text-align: center !important;
+  }
+
+  &__currency {
+    display: flex;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  &__image {
+    margin-right: 8px;
+    border-radius: 1px;
+  }
+}
