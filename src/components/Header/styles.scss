@@ -20,6 +20,8 @@
     display: flex;
 
     &__item {
+      text-decoration: none;
+      color: #1c2e36;
       margin-left: 5px;
       padding: 13px 20px;
       float: left;
@@ -29,13 +31,6 @@
       border-bottom: 4px solid transparent;
       font-family: "Muli", sans-serif !important;
       list-style: none;
-      cursor: pointer;
-    }
-
-    &__link {
-      text-align: center;
-      text-decoration: none;
-      color: #1c2e36;
     }
 
     &__item:hover {
