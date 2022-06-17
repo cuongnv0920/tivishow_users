@@ -1,5 +1,12 @@
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import { AppBar, IconButton, Menu, MenuItem, Toolbar } from "@mui/material";
+import {
+  AppBar,
+  IconButton,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -7,7 +14,7 @@ import DialogContent from "@mui/material/DialogContent";
 import { Container } from "@mui/system";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import Login from "../../features/Auth/components/Login";
@@ -29,6 +36,7 @@ function Header(props) {
   const isLoggedIn = !!loggedInUser._id;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -53,6 +61,8 @@ function Header(props) {
     const action = logout();
     dispatch(action);
     setAnchorEl(null);
+
+    navigate("/", { replace: true });
   };
 
   const pageMenus = pages.filter((page, _) => page.role === loggedInUser.role);
@@ -82,36 +92,38 @@ function Header(props) {
 
             {isLoggedIn && (
               <div>
-                <IconButton
-                  size="large"
+                <Button
                   aria-label="account of current user"
                   aria-controls="menu-appbar"
                   aria-haspopup="true"
-                  className="appbar__iconButton"
+                  className="buttonUser"
                   onClick={handleMenuOpen}
                 >
-                  <AccountCircle className="appbar__icon" />
-                </IconButton>
+                  <Typography className="buttonUser__username">
+                    {loggedInUser.username}
+                  </Typography>
+                </Button>
                 <Menu
+                  className="buttonUser__menu"
                   id="menu-appbar"
                   anchorEl={anchorEl}
                   anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
+                    vertical: "bottom",
+                    horizontal: "left",
                   }}
                   keepMounted
                   transformOrigin={{
                     vertical: "top",
-                    horizontal: "right",
+                    horizontal: "left",
                   }}
                   open={Boolean(anchorEl)}
                   onClose={handleMenuClose}
                 >
-                  <MenuItem className="appbar_menuItem">
+                  <MenuItem className="buttonUser__menuItem">
                     Cài đặt tài khoản
                   </MenuItem>
                   <MenuItem
-                    className="appbar_menuItem"
+                    className="buttonUser__menuItem"
                     onClick={handleLogoutClick}
                   >
                     Thoát

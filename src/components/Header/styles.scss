@@ -37,11 +37,8 @@
       border-color: #00524e;
       background-color: #f8f8f8;
       transition: 0.3s all;
+      color: #00524e;
     }
-  }
-
-  &__icon {
-    color: #00524e;
   }
 
   &__login {
@@ -51,11 +48,6 @@
     font-weight: 600 !important;
     text-transform: none !important;
   }
-
-  &__menuItem {
-    font-family: "Muli", sans-serif !important;
-    color: #1c2e36 !important;
-  }
 }
 
 .dialog {
@@ -63,5 +55,35 @@
     font-family: "Muli", sans-serif !important;
     color: #1c2e36 !important;
     font-weight: 600 !important;
+  }
+}
+
+.buttonUser {
+  background-color: #fff !important;
+
+  text-transform: none !important;
+
+  &__username {
+    font-family: "Muli", sans-serif !important;
+    color: #1c2e36 !important;
+    font-weight: 600 !important;
+  }
+
+  &__username:hover {
+    color: #00524e !important;
+    transition: 0.3s all;
+  }
+
+  &__menuItem {
+    display: block !important;
+    padding: 5px 16px !important;
+    line-height: 2 !important;
+    font-family: "Muli", sans-serif !important;
+    color: #1c2e36 !important;
+  }
+
+  &__menuItem:hover {
+    color: #00524e !important;
+    transition: 0.3s all;
   }
 }
