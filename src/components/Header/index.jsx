@@ -19,9 +19,9 @@ import "./styles.scss";
 Header.propTypes = {};
 
 const pages = [
-  { title: "Quản trị", href: "/admin", role: "admin" },
-  { title: "Biên độ", href: "/amplitude", role: "admin" },
-  { title: "Poster", href: "/poster", role: "user" },
+  { title: "Quản trị", href: "admin", role: "admin" },
+  { title: "Biên độ", href: "amplitude", role: "admin" },
+  { title: "Poster", href: "poster", role: "user" },
 ];
 
 function Header(props) {
@@ -68,11 +68,9 @@ function Header(props) {
 
             <ul className="appbar__menu menu">
               {pageMenus.map((pageMenu, index) => (
-                <li key={index} className="menu__item">
-                  <a href={pageMenu.href} className="menu__link">
-                    {pageMenu.title}
-                  </a>
-                </li>
+                <Link to={pageMenu.href} key={index} className="menu__item">
+                  {pageMenu.title}
+                </Link>
               ))}
             </ul>
 
@@ -98,7 +96,7 @@ function Header(props) {
                   id="menu-appbar"
                   anchorEl={anchorEl}
                   anchorOrigin={{
-                    vertical: "bootom",
+                    vertical: "top",
                     horizontal: "right",
                   }}
                   keepMounted

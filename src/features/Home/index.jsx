@@ -8,7 +8,7 @@ function Home(props) {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<ListPage />} />
+        <Route path="/*" element={<ListPage />} />
       </Routes>
     </div>
   );
