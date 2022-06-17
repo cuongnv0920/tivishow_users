@@ -1,12 +1,10 @@
-import React from "react";
 import { Typography } from "@mui/material";
 import MaterialTable from "material-table";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
-import userApi from "../../../../api/userApi";
-import "./styles.scss";
+import roomApi from "../../../../api/roomApi";
 
-TableUsers.propTypes = {};
+TableRooms.propTypes = {};
 
 const columns = [
   {
@@ -15,36 +13,35 @@ const columns = [
     editable: "never",
   },
   {
-    title: "Tên đăng nhập",
-    field: "username",
+    title: "Mã Phòng",
+    field: "code",
     cellStyle: { whiteSpace: "nowrap" },
-    editable: "never",
+    validate: (row) => row.code !== "",
   },
   {
-    title: "Email",
-    field: "email",
+    title: "Tên Phòng",
+    field: "name",
     cellStyle: { whiteSpace: "nowrap" },
-    editable: "never",
-  },
-  // { title: "Phòng/ Ban", field: "room", cellStyle: { whiteSpace: "nowrap" } },
-  {
-    title: "Trạng thai",
-    field: "status",
-    cellStyle: { whiteSpace: "nowrap" },
-    lookup: { false: "disabled", true: "enabled" },
-  },
-  {
-    title: "Quyền truy cập",
-    field: "role",
-    cellStyle: { whiteSpace: "nowrap" },
-    lookup: { user: "user", admin: "admin" },
+    validate: (row) => row.name !== "",
   },
 ];
 
-function TableUsers(props) {
+function TableRooms(props) {
   const [rowData, setRowData] = useState([]);
 
   const { enqueueSnackbar } = useSnackbar();
+
+  const onRowAdd = async (newRow) => {
+    try {
+      await roomApi.create(newRow);
+
+      setRowData([...rowData, newRow]);
+
+      enqueueSnackbar("Thêm mới thành công!", { variant: "success" });
+    } catch (error) {
+      enqueueSnackbar(error.message, { variant: "error" });
+    }
+  };
 
   const onRowUpdate = async (newRow, oldRow) => {
     try {
@@ -52,7 +49,7 @@ function TableUsers(props) {
       const idx = oldRow.tableData.id;
       rowUpdate[idx] = newRow;
 
-      await userApi.update(newRow);
+      await roomApi.update(newRow);
       setRowData([...rowUpdate]);
 
       enqueueSnackbar("Cập nhật thành công!", { variant: "success" });
@@ -62,26 +59,28 @@ function TableUsers(props) {
   };
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      const users = await userApi.getAll();
+    const fetchRooms = async () => {
+      const rooms = await roomApi.getAll();
 
-      setRowData(users.map((user, idx) => ({ ...user, stt: idx + 1 })));
+      setRowData(rooms.map((room, idx) => ({ ...room, stt: idx + 1 })));
     };
-    fetchUsers();
+    fetchRooms();
   }, []);
+
   return (
-    <div className="root">
+    <div>
       <MaterialTable
         className="table"
         title={
           <Typography variant="h5" className="table__title">
-            User
+            Phòng
           </Typography>
         }
         columns={columns}
         data={rowData}
         editable={{
           onRowUpdate: onRowUpdate,
+          onRowAdd: onRowAdd,
         }}
         options={{
           tableLayout: "auto",
@@ -98,4 +97,4 @@ function TableUsers(props) {
   );
 }
 
-export default TableUsers;
+export default TableRooms;
