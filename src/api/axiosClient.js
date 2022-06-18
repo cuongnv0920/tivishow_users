@@ -34,6 +34,7 @@ axiosClient.interceptors.response.use(
       "/api/users/register",
       "/api/auth/login",
       "/api/users/update",
+      "/api/rooms/create",
     ];
     const { config, status, data } = error.response || {};
 

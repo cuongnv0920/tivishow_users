@@ -68,14 +68,16 @@ function TableRooms(props) {
   }, []);
 
   return (
-    <div>
+    <>
+      <div className="headTable">
+        <Typography variant="h6" className="headTable__title">
+          Danh sách phòng/ ban
+        </Typography>
+      </div>
+
       <MaterialTable
         className="table"
-        title={
-          <Typography variant="h5" className="table__title">
-            Phòng
-          </Typography>
-        }
+        title=""
         columns={columns}
         data={rowData}
         editable={{
@@ -86,14 +88,19 @@ function TableRooms(props) {
           tableLayout: "auto",
           actionsColumnIndex: -1,
           headerStyle: {
-            fontSize: "15px",
+            fontSize: "1rem",
             fontWeight: "bold",
             whiteSpace: "nowrap",
             color: "#1c2e36",
+            fontFamily: "'Muli', sans-serif",
           },
+          rowStyle: {
+            fontSize: "0.8rem",
+          },
+          pageSizeOptions: false,
         }}
       />
-    </div>
+    </>
   );
 }
 

@@ -12,13 +12,13 @@ function ListPageAdmin(props) {
       <Container>
         <Grid container spacing={2} className="admin__row">
           <Grid item xs={6} md={7} className="admin_item">
-            <Paper elevation={0} className="admin__paper">
+            <Paper elevation={1} className="admin__paper">
               <TableUsers />
             </Paper>
           </Grid>
 
           <Grid item xs={6} md={5} className="admin_item">
-            <Paper elevation={0} className="admin__paper">
+            <Paper elevation={1} className="admin__paper">
               <TableRooms />
             </Paper>
           </Grid>
