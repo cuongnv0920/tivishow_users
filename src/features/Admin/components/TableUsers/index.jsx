@@ -1,4 +1,3 @@
-import React from "react";
 import { Typography } from "@mui/material";
 import MaterialTable from "material-table";
 import { useSnackbar } from "notistack";
@@ -31,7 +30,12 @@ const columns = [
     title: "Trạng thai",
     field: "status",
     cellStyle: { whiteSpace: "nowrap" },
-    lookup: { false: "disabled", true: "enabled" },
+    lookup: { true: "enabled", false: "disabled" },
+    render: (row) => (
+      <div className={row.status ? "enabled" : "disabled"}>
+        {row.status ? "enabled" : "disabled"}
+      </div>
+    ),
   },
   {
     title: "Quyền truy cập",
@@ -46,20 +50,24 @@ function TableUsers(props) {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const onRowUpdate = async (newRow, oldRow) => {
-    try {
-      const rowUpdate = [...rowData];
-      const idx = oldRow.tableData.id;
-      rowUpdate[idx] = newRow;
+  const onRowUpdate = (newRow, oldRow) =>
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        try {
+          const rowUpdate = [...rowData];
+          const idx = oldRow.tableData.id;
+          rowUpdate[idx] = newRow;
 
-      await userApi.update(newRow);
-      setRowData([...rowUpdate]);
+          userApi.update(newRow);
+          setRowData([...rowUpdate]);
 
-      enqueueSnackbar("Cập nhật thành công!", { variant: "success" });
-    } catch (error) {
-      enqueueSnackbar(error.message, { variant: "error" });
-    }
-  };
+          enqueueSnackbar("Cập nhật thành công!", { variant: "success" });
+          resolve();
+        } catch (error) {
+          enqueueSnackbar(error.message, { variant: "error" });
+        }
+      }, 1000);
+    });
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -69,15 +77,18 @@ function TableUsers(props) {
     };
     fetchUsers();
   }, []);
+
   return (
-    <div className="root">
+    <>
+      <div className="headTable">
+        <Typography variant="h6" className="headTable__title">
+          Danh sách người dùng
+        </Typography>
+      </div>
+
       <MaterialTable
         className="table"
-        title={
-          <Typography variant="h5" className="table__title">
-            User
-          </Typography>
-        }
+        title=""
         columns={columns}
         data={rowData}
         editable={{
@@ -87,14 +98,20 @@ function TableUsers(props) {
           tableLayout: "auto",
           actionsColumnIndex: -1,
           headerStyle: {
-            fontSize: "15px",
+            fontSize: "1rem",
             fontWeight: "bold",
             whiteSpace: "nowrap",
             color: "#1c2e36",
+            fontFamily: "'Muli', sans-serif",
           },
+          rowStyle: {
+            fontSize: "0.8rem",
+          },
+
+          pageSizeOptions: false,
         }}
       />
-    </div>
+    </>
   );
 }
 

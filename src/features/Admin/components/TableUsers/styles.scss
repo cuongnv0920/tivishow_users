@@ -20,8 +20,27 @@
   direction: ltr;
   -webkit-font-smoothing: antialiased;
 }
+
+.MuiPaper-elevation2 {
+  border-radius: none !important;
+  box-shadow: none !important;
+}
+
 .table {
   width: 100%;
+}
+
+.disabled {
+  color: #f50057 !important;
+}
+
+.enabled {
+  color: #2196f3 !important;
+}
+
+.headTable {
+  padding: 8px 16px;
+  background-color: #fff;
 
   &__title {
     color: #00524e;
