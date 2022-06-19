@@ -1,8 +1,9 @@
-import { Typography } from "@mui/material";
+import { LinearProgress, Typography } from "@mui/material";
 import MaterialTable from "material-table";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 import userApi from "../../../../api/userApi";
+
 import "./styles.scss";
 
 TableUsers.propTypes = {};
@@ -30,10 +31,10 @@ const columns = [
     title: "Trạng thai",
     field: "status",
     cellStyle: { whiteSpace: "nowrap" },
-    lookup: { true: "enabled", false: "disabled" },
+    lookup: { enabled: "enabled", disabled: "disabled" },
     render: (row) => (
-      <div className={row.status ? "enabled" : "disabled"}>
-        {row.status ? "enabled" : "disabled"}
+      <div style={{ color: row.status === "enabled" ? "#2196f3" : "#f50057" }}>
+        {row.status === "enabled" ? "enabled" : "disabled"}
       </div>
     ),
   },
@@ -42,6 +43,11 @@ const columns = [
     field: "role",
     cellStyle: { whiteSpace: "nowrap" },
     lookup: { user: "user", admin: "admin" },
+    render: (row) => (
+      <div style={{ color: row.role === "admin" ? "#f50057" : "#2196f3" }}>
+        {row.role}
+      </div>
+    ),
   },
 ];
 
@@ -50,24 +56,20 @@ function TableUsers(props) {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const onRowUpdate = (newRow, oldRow) =>
-    new Promise((resolve, reject) => {
-      setTimeout(() => {
-        try {
-          const rowUpdate = [...rowData];
-          const idx = oldRow.tableData.id;
-          rowUpdate[idx] = newRow;
+  const onRowUpdate = async (newRow, oldRow) => {
+    try {
+      const rowUpdate = [...rowData];
+      const idx = oldRow.tableData.id;
+      rowUpdate[idx] = newRow;
 
-          userApi.update(newRow);
-          setRowData([...rowUpdate]);
+      await userApi.update(newRow);
+      setRowData([...rowUpdate]);
 
-          enqueueSnackbar("Cập nhật thành công!", { variant: "success" });
-          resolve();
-        } catch (error) {
-          enqueueSnackbar(error.message, { variant: "error" });
-        }
-      }, 1000);
-    });
+      enqueueSnackbar("Cập nhật thành công!", { variant: "success" });
+    } catch (error) {
+      enqueueSnackbar(error.message, { variant: "error" });
+    }
+  };
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -89,6 +91,11 @@ function TableUsers(props) {
       <MaterialTable
         className="table"
         title=""
+        components={{
+          OverlayLoading: (props) => (
+            <LinearProgress className="table__progress" />
+          ),
+        }}
         columns={columns}
         data={rowData}
         editable={{

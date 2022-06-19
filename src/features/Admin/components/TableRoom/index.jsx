@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { LinearProgress, Typography } from "@mui/material";
 import MaterialTable from "material-table";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
@@ -16,13 +16,24 @@ const columns = [
     title: "Mã Phòng",
     field: "code",
     cellStyle: { whiteSpace: "nowrap" },
-    validate: (row) => row.code !== "",
+
+    validate: (row) => {
+      if (row.code === undefined || row.code === "") {
+        return "Vui lòng nhập mã Phòng/ Ban.";
+      }
+      return true;
+    },
   },
   {
     title: "Tên Phòng",
     field: "name",
     cellStyle: { whiteSpace: "nowrap" },
-    validate: (row) => row.name !== "",
+    validate: (row) => {
+      if (row.name === undefined || row.name === "") {
+        return "Vui lòng nhập tên Phòng/ Ban.";
+      }
+      return true;
+    },
   },
 ];
 
@@ -78,6 +89,11 @@ function TableRooms(props) {
       <MaterialTable
         className="table"
         title=""
+        components={{
+          OverlayLoading: (props) => (
+            <LinearProgress className="table__progress" />
+          ),
+        }}
         columns={columns}
         data={rowData}
         editable={{
