@@ -8,7 +8,7 @@ function Poster(props) {
     <div>
       {console.log("poster")}
       <Routes>
-        <Route path="poster" element={<ListPagePoster />} />
+        <Route path="/*" element={<ListPagePoster />} />
       </Routes>
     </div>
   );
