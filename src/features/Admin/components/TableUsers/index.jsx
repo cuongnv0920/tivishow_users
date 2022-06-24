@@ -74,7 +74,7 @@ function TableUsers(props) {
   useEffect(() => {
     const fetchUsers = async () => {
       const users = await userApi.getAll();
-      console.log(users);
+
       setRowData(users.map((user, idx) => ({ ...user, stt: idx + 1 })));
     };
     fetchUsers();
