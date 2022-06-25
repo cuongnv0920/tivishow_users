@@ -1,4 +1,4 @@
-import { LinearProgress, Typography } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import MaterialTable from "material-table";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
@@ -26,7 +26,21 @@ const columns = [
     cellStyle: { whiteSpace: "nowrap" },
     editable: "never",
   },
-  // { title: "Phòng/ Ban", field: "room", cellStyle: { whiteSpace: "nowrap" } },
+  {
+    title: "Reset mật khẩu",
+    field: "password",
+    cellStyle: { whiteSpace: "nowrap" },
+    render: () => <div>&#x272E;&#x272E;&#x272E;&#x272E;&#x272E;&#x272E;</div>,
+    editComponent: (props) => (
+      <TextField
+        type="password"
+        size="small"
+        className="editComponentPassword"
+        variant="filled"
+        onChange={(e) => props.onChange(e.target.value)}
+      />
+    ),
+  },
   {
     title: "Trạng thai",
     field: "status",
@@ -64,7 +78,7 @@ function TableUsers(props) {
 
       await userApi.update(newRow);
       setRowData([...rowUpdate]);
-
+      console.log([...rowUpdate]);
       enqueueSnackbar("Cập nhật thành công!", { variant: "success" });
     } catch (error) {
       enqueueSnackbar(error.message, { variant: "error" });
@@ -91,11 +105,11 @@ function TableUsers(props) {
       <MaterialTable
         className="table"
         title=""
-        components={{
-          OverlayLoading: (props) => (
-            <LinearProgress className="table__progress" />
-          ),
-        }}
+        // components={{
+        //   OverlayLoading: (props) => (
+        //     <LinearProgress className="table__progress" />
+        //   ),
+        // }}
         columns={columns}
         data={rowData}
         editable={{
