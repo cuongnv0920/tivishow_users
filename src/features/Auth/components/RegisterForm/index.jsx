@@ -1,29 +1,18 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LockOutlined } from "@mui/icons-material";
-import {
-  Avatar,
-  Button,
-  LinearProgress,
-  MenuItem,
-  Typography,
-} from "@mui/material";
+import { Avatar, Button, LinearProgress, Typography } from "@mui/material";
 import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import InputField from "../../../../components/InputField";
 import PasswordField from "../../../../components/PasswordField";
-import roomApi from "../../../../api/roomApi";
 import "./styles.scss";
-import SelectField from "../../../../components/SelectField";
 
 RegisterForm.propTypes = {
   onSubmit: PropTypes.func,
 };
 
 function RegisterForm(props) {
-  const [roomData, setRoomDate] = useState([]);
-
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -43,7 +32,6 @@ function RegisterForm(props) {
   const form = useForm({
     defaultValues: {
       email: "",
-      room: "",
       password: "",
       retypePassword: "",
     },
@@ -60,15 +48,6 @@ function RegisterForm(props) {
 
   const { isSubmitting } = form.formState;
 
-  useEffect(() => {
-    const fetchRooms = async () => {
-      const rooms = await roomApi.getAll();
-
-      setRoomDate(rooms);
-    };
-    fetchRooms();
-  }, []);
-
   return (
     <div className="register">
       {isSubmitting && <LinearProgress className="register__progress" />}
@@ -82,14 +61,6 @@ function RegisterForm(props) {
 
       <form onSubmit={form.handleSubmit(handleSubmit)}>
         <InputField name="email" label="Địa chỉ email" form={form} />
-
-        <SelectField name="room" value="room" label="Chọn Phòng" form={form}>
-          {roomData.map((option) => (
-            <MenuItem value={option.code} key={option.code}>
-              {option.name}
-            </MenuItem>
-          ))}
-        </SelectField>
 
         <PasswordField name="password" label="Mật khẩu" form={form} />
         <PasswordField

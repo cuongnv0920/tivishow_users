@@ -89,11 +89,11 @@ function TableRooms(props) {
       <MaterialTable
         className="table"
         title=""
-        components={{
-          OverlayLoading: (props) => (
-            <LinearProgress className="table__progress" />
-          ),
-        }}
+        // components={{
+        //   OverlayLoading: (props) => (
+        //     <LinearProgress className="table__progress" />
+        //   ),
+        // }}
         columns={columns}
         data={rowData}
         editable={{
