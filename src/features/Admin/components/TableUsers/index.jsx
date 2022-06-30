@@ -78,7 +78,6 @@ function TableUsers(props) {
 
       await userApi.update(newRow);
       setRowData([...rowUpdate]);
-      console.log([...rowUpdate]);
       enqueueSnackbar("Cập nhật thành công!", { variant: "success" });
     } catch (error) {
       enqueueSnackbar(error.message, { variant: "error" });
@@ -105,11 +104,6 @@ function TableUsers(props) {
       <MaterialTable
         className="table"
         title=""
-        // components={{
-        //   OverlayLoading: (props) => (
-        //     <LinearProgress className="table__progress" />
-        //   ),
-        // }}
         columns={columns}
         data={rowData}
         editable={{
@@ -129,7 +123,7 @@ function TableUsers(props) {
             fontSize: "0.8rem",
           },
 
-          pageSizeOptions: false,
+          pageSizeOptions: [],
         }}
       />
     </>

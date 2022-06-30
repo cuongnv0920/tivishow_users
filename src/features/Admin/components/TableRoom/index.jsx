@@ -1,4 +1,4 @@
-import { LinearProgress, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import MaterialTable from "material-table";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
@@ -89,11 +89,6 @@ function TableRooms(props) {
       <MaterialTable
         className="table"
         title=""
-        // components={{
-        //   OverlayLoading: (props) => (
-        //     <LinearProgress className="table__progress" />
-        //   ),
-        // }}
         columns={columns}
         data={rowData}
         editable={{
@@ -113,7 +108,7 @@ function TableRooms(props) {
           rowStyle: {
             fontSize: "0.8rem",
           },
-          pageSizeOptions: false,
+          pageSizeOptions: [],
         }}
       />
     </>
