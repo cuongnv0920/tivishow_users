@@ -6,7 +6,6 @@ Poster.propTypes = {};
 function Poster(props) {
   return (
     <div>
-      {console.log("poster")}
       <Routes>
         <Route path="/*" element={<ListPagePoster />} />
       </Routes>

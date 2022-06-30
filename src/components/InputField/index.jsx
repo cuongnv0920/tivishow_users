@@ -12,7 +12,7 @@ InputField.propTypes = {
 };
 
 function InputField(props) {
-  const { form, name, label, disabled } = props;
+  const { form, name, label, disabled, inputProps } = props;
   const { control } = form;
 
   return (
@@ -35,6 +35,7 @@ function InputField(props) {
           name={name}
           value={value}
           disabled={disabled}
+          inputProps={inputProps}
         />
       )}
     ></Controller>

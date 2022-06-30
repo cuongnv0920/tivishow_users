@@ -12,7 +12,7 @@ const posterApi = {
   },
 
   update(data) {
-    const url = `/api/posters/update/${data.id}`;
+    const url = "/api/posters/update";
     return axiosClient.put(url, data);
   },
 

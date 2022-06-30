@@ -1,31 +1,34 @@
 import { Chip } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Calendar } from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import Moment from "react-moment";
 import { Zoom } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
+import posterApi from "../../../../api/posterApi";
 import Clock from "../../../../components/Clock";
-import Slide1 from "../../../../images/slide1.jpg";
-import Slide2 from "../../../../images/slide2.png";
-import Slide3 from "../../../../images/slide3.jpg";
+import URL from "../../../../configs/api.conf";
 import "./styles.scss";
 
 ProductAds.propTypes = {};
 
-const images = [
-  { url: Slide1, caption: "Slide 1" },
-  { url: Slide2, caption: "Slide 2" },
-  { url: Slide3, caption: "Slide 3" },
-];
-
 function ProductAds(props) {
   const [date, setDate] = useState(new Date());
+  const [images, setImages] = useState([]);
 
   const onChange = (date) => {
     setDate(date);
   };
+
+  useEffect(() => {
+    const fetchPosters = async () => {
+      const posters = await posterApi.getAll();
+
+      setImages(posters);
+    };
+    fetchPosters();
+  }, [images]);
 
   return (
     <Box>
@@ -49,14 +52,17 @@ function ProductAds(props) {
       <div className="poster">
         <div className="poster__slide">
           <Zoom scale={0.4}>
-            {images.map((image, index) => (
-              <img
-                key={index}
-                className="poster__image"
-                src={image.url}
-                alt="slide show"
-              />
-            ))}
+            {images.map(
+              (el, index) =>
+                el.status === "enabled" && (
+                  <img
+                    key={index}
+                    className="poster__image"
+                    src={URL.apiUrl + "/" + el.image}
+                    alt="slide show"
+                  />
+                )
+            )}
           </Zoom>
         </div>
 
