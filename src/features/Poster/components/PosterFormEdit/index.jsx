@@ -86,18 +86,20 @@ function PosterFormEdit(props) {
         </label>
 
         <FormControl margin="normal">
-          <FormLabel>Trạng Thái</FormLabel>
+          <FormLabel className="posterForm__label">Trạng Thái</FormLabel>
           <RadioGroup
             row
             {...register("status")}
             onChange={handleChangeChecked}
           >
             <FormControlLabel
+              className="posterForm__radio"
               value="enabled"
               control={<Radio />}
               label="enabled"
             />
             <FormControlLabel
+              className="posterForm__radio"
               value="disabled"
               control={<Radio />}
               label="disabled"
