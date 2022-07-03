@@ -2,7 +2,9 @@ import { Box, Grid, Paper } from "@mui/material";
 import { Container } from "@mui/system";
 import React from "react";
 import ProductAds from "../../components/ProductAds";
+import { Slide } from "react-slideshow-image";
 import TableExchangeRate from "../../components/TableExchangeRate";
+import TableInterest from "../../components/TableInterest";
 import "./styles.scss";
 
 ListPage.propTypes = {};
@@ -14,7 +16,10 @@ function ListPage(props) {
         <Grid container spacing={2} className="home__row">
           <Grid item xs={6} md={8} className="home__item">
             <Paper elevation={0} className="home__paper">
-              <TableExchangeRate />
+              <Slide>
+                <TableExchangeRate key={0} />
+                <TableInterest key={1} />
+              </Slide>
             </Paper>
           </Grid>
 
