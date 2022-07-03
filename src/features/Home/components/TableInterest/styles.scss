@@ -1,4 +1,4 @@
-.exchangeRate {
+.interest {
   &__title {
     padding: 10px 0px;
     text-align: center;
@@ -12,22 +12,17 @@
   }
 }
 
-.headExchangeRate {
+.headInterest {
   &__cell {
     font-family: "Muli", sans-serif !important;
     font-weight: 600 !important;
     font-size: 0.9rem !important;
     color: #00524e !important;
     line-height: 0.5rem !important;
-    text-align: center !important;
-  }
-
-  &__cell p {
-    font-style: italic;
   }
 }
 
-.bodyExchangeRate {
+.bodyInterest {
   &__row:nth-of-type(odd) {
     background-color: #ebedf0;
   }
@@ -37,17 +32,9 @@
     font-family: "Muli", sans-serif !important;
     font-size: 0.9rem !important;
     color: #1c2e36;
-    text-align: center !important;
   }
 
-  &__currency {
-    display: flex;
-    text-align: center;
+  &__term {
     font-weight: 600;
-  }
-
-  &__image {
-    margin-right: 8px;
-    border-radius: 1px;
   }
 }

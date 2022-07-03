@@ -16,14 +16,26 @@ export const register = createAsyncThunk("user/register", async (payload) => {
 });
 
 export const login = createAsyncThunk("user/login", async (payload) => {
-  // call API to register
+  // call API to login
   const data = await authApi.login(payload);
 
   // save data to local storage
   localStorage.setItem(StorageKeys.TOKEN, data.jwt);
   localStorage.setItem(StorageKeys.USER, JSON.stringify(data.user));
 
-  //return user data
+  // return user data
+  return data.user;
+});
+
+export const setting = createAsyncThunk("user/setting", async (payload) => {
+  // call API to setting user
+  const data = await authApi.update(payload);
+
+  // save data to local storage
+  localStorage.getItem(StorageKeys.TOKEN, data.jwt);
+  localStorage.getItem(StorageKeys.USER, JSON.stringify(data.user));
+
+  // return user data
   return data.user;
 });
 

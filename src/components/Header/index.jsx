@@ -11,6 +11,7 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import Login from "../../features/Auth/components/Login";
 import Register from "../../features/Auth/components/Register";
+import Setting from "../../features/Auth/components/Setting";
 import { logout } from "../../features/Auth/userSlice";
 import logo from "../../images/logo-header.png";
 import "./styles.scss";
@@ -20,6 +21,7 @@ Header.propTypes = {};
 const pages = [
   { title: "Quản trị", href: "admin", role: "admin" },
   { title: "Biên độ", href: "amplitude", role: "admin" },
+  { title: "Lãi suất tại quầy", href: "interest", role: "admin" },
   { title: "Poster", href: "poster", role: "user" },
 ];
 
@@ -31,6 +33,7 @@ function Header(props) {
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
+  const [openSetting, setOpenSetting] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMenuOpen = (event) => {
@@ -44,9 +47,15 @@ function Header(props) {
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleOpenSetting = () => {
+    setOpenSetting(true);
+  };
+  const handleCloseSetting = () => {
+    setOpenSetting(false);
   };
 
   const handleLogoutClick = () => {
@@ -111,8 +120,11 @@ function Header(props) {
                   open={Boolean(anchorEl)}
                   onClose={handleMenuClose}
                 >
-                  <MenuItem className="buttonUser__menuItem">
-                    Cài đặt tài khoản
+                  <MenuItem
+                    className="buttonUser__menuItem"
+                    onClick={handleOpenSetting}
+                  >
+                    Đổi mật khẩu
                   </MenuItem>
                   <MenuItem
                     className="buttonUser__menuItem"
@@ -152,6 +164,24 @@ function Header(props) {
         </DialogContent>
         <DialogActions>
           <Button className="dialog__cancel" onClick={handleClose}>
+            Cancel
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={openSetting}
+        onClose={(event, reason) => {
+          if (reason !== "backdropClick") {
+            handleCloseSetting(event, reason);
+          }
+        }}
+      >
+        <DialogContent className="dialog">
+          <Setting closeDialog={handleCloseSetting} />
+        </DialogContent>
+        <DialogActions>
+          <Button className="dialog__cancel" onClick={handleCloseSetting}>
             Cancel
           </Button>
         </DialogActions>
