@@ -8,28 +8,36 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import React from "react";
-import USD from "../../../../images/USD.svg";
+import React, { useEffect, useState } from "react";
+import exchangeRateApi from "../../../../api/exchangeRateApi";
+import interestApi from "../../../../api/interestApi";
+import URL from "../../../../configs/api.conf";
 import "./styles.scss";
 
 TableExchangeRate.propTypes = {};
 
-function createData(currency, cash, transfering, selling) {
-  return { currency, cash, transfering, selling };
-}
-
-const rows = [
-  createData("USD", 23.058, 23.058, 23.338),
-  createData("GBP", 23.058, 23.058, 23.338),
-  createData("HKD", 23.058, 23.058, 23.338),
-  createData("CHF", 23.058, 23.058, 23.338),
-  createData("JPG", 23.058, 23.058, 23.338),
-  createData("AUD", 23.058, 23.058, 23.338),
-  createData("CAD", 23.058, 23.058, 23.338),
-  createData("EUR", 23.058, 23.058, 23.338),
-];
-
 function TableExchangeRate(props) {
+  const [exchangeRate, setExchangeRate] = useState([]);
+  const [interest, setInterest] = useState([]);
+
+  useEffect(() => {
+    const fetchExchangeRate = async () => {
+      const exchangeRates = await exchangeRateApi.getAll();
+
+      setExchangeRate(exchangeRates);
+    };
+    fetchExchangeRate();
+  }, [exchangeRate]);
+
+  useEffect(() => {
+    const fetchInterest = async () => {
+      const interests = await interestApi.getAll();
+
+      setInterest(interests);
+    };
+    fetchInterest();
+  }, []);
+
   return (
     <Box className="exchangeRate">
       <div className="exchangeRate__title">
@@ -62,8 +70,8 @@ function TableExchangeRate(props) {
           </TableHead>
 
           <TableBody className="exchangeRate__body bodyExchangeRate">
-            {rows.map((row) => (
-              <TableRow key={row.currency} className="bodyExchangeRate__row">
+            {exchangeRate.map((row, idx) => (
+              <TableRow key={idx} className="bodyExchangeRate__row">
                 <TableCell
                   component="th"
                   scope="row"
@@ -71,21 +79,21 @@ function TableExchangeRate(props) {
                 >
                   <div className="bodyExchangeRate__currency">
                     <img
-                      src={USD}
-                      className="bodyExchangeRate__image"
+                      src={URL.apiUrl + "/" + row.image}
+                      className="bodyExchangeRate__ensign"
                       alt="flag"
                     />
                     <div>{row.currency}</div>
                   </div>
                 </TableCell>
                 <TableCell className="bodyExchangeRate__cell">
-                  {row.cash}
+                  {row.buyCash.toLocaleString()}
                 </TableCell>
                 <TableCell className="bodyExchangeRate__cell">
-                  {row.transfering}
+                  {row.buyTransfer.toLocaleString()}
                 </TableCell>
                 <TableCell className="bodyExchangeRate__cell">
-                  {row.selling}
+                  {row.selling.toLocaleString()}
                 </TableCell>
               </TableRow>
             ))}

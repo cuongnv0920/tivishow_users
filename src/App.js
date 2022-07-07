@@ -6,6 +6,7 @@ import Amplitude from "./features/Amplitude";
 import Home from "./features/Home";
 import Interest from "./features/Interest";
 import Poster from "./features/Poster";
+import Source from "./features/Source";
 
 function App() {
   const loggedInUser = useSelector((state) => state.user.current);
@@ -25,6 +26,7 @@ function App() {
         <Route path={requireAuthAdmin("amplitude/*")} element={<Amplitude />} />
         <Route path={requireAuthAdmin("interest/*")} element={<Interest />} />
         <Route path={requireAuthUser("poster/*")} element={<Poster />} />
+        <Route path={requireAuthUser("source/*")} element={<Source />} />
       </Routes>
     </div>
   );

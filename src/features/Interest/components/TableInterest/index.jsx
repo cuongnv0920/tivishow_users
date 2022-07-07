@@ -1,16 +1,36 @@
-import { Typography } from "@mui/material";
+import { Button, LinearProgress, TextField, Typography } from "@mui/material";
 import MaterialTable from "material-table";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import interestApi from "../../../../api/interestApi";
+import validApi from "../../../../api/validApi";
 import "./styles.scss";
 
 TableInterest.propTypes = {};
 
 function TableInterest(props) {
   const [rowData, setRowData] = useState([]);
+  const [value, setValue] = useState(new Date());
 
   const { enqueueSnackbar } = useSnackbar();
+  const { register, handleSubmit, formState } = useForm();
+  const { isSubmitting } = formState;
+
+  const onSubmit = async (data) => {
+    try {
+      await validApi.create(data);
+
+      enqueueSnackbar("Cập nhật thành công!", { variant: "success" });
+    } catch (error) {
+      enqueueSnackbar(error.message, { variant: "error" });
+    }
+  };
+
+  const handleChange = (newDate) => {
+    setValue(newDate);
+  };
 
   const onRowAdd = async (newRow) => {
     try {
@@ -73,20 +93,6 @@ function TableInterest(props) {
         return true;
       },
     },
-
-    {
-      title: "Trạng thai",
-      field: "status",
-      cellStyle: { whiteSpace: "nowrap" },
-      lookup: { enabled: "enabled", disabled: "disabled" },
-      render: (row) => (
-        <div
-          style={{ color: row.status === "enabled" ? "#2196f3" : "#f50057" }}
-        >
-          {row.status === "enabled" ? "enabled" : "disabled"}
-        </div>
-      ),
-    },
   ];
 
   useEffect(() => {
@@ -102,19 +108,48 @@ function TableInterest(props) {
 
   return (
     <>
+      <div className="headTableInterest">
+        <Typography variant="h6" className="headTableInterest__title">
+          Bảng lãi suất tiền gửi thông thường
+        </Typography>
+
+        <form
+          className="headTableInterest__form"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          {isSubmitting && (
+            <LinearProgress className="headTableInterest__progress" />
+          )}
+
+          <TextField
+            id="date"
+            label="Ngày hiệu lực"
+            defaultValue={value}
+            onChange={handleChange}
+            className="headTableInterest__input"
+            {...register("valid")}
+            type="date"
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+
+          <Button className="headTableInterest__button" type="submit">
+            Lưu
+          </Button>
+        </form>
+      </div>
+
       <MaterialTable
-        title={
-          <div className="headTable">
-            <Typography className="headTable__title">
-              BẢNG LÃI SUẤT NIÊM YẾT TẠI QUẦY
-            </Typography>
-          </div>
-        }
+        title=""
         columns={columns}
         data={rowData}
         editable={{
           onRowAdd: onRowAdd,
           onRowUpdate: onRowUpdate,
+        }}
+        icons={{
+          Add: () => <AddCircleIcon sx={{ color: "#daa520" }} />,
         }}
         options={{
           tableLayout: "auto",
@@ -133,7 +168,11 @@ function TableInterest(props) {
           rowStyle: {
             fontSize: "0.8rem",
           },
-          pageSizeOptions: [],
+
+          pageSizeOptions: [10, 20, 30, 50],
+          pageSize: 10,
+          paging: true,
+          addRowPosition: "first",
         }}
       />
     </>
