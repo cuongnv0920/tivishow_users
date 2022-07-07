@@ -23,6 +23,7 @@ const pages = [
   { title: "Biên độ", href: "amplitude", role: "admin" },
   { title: "Lãi suất tại quầy", href: "interest", role: "admin" },
   { title: "Poster", href: "poster", role: "user" },
+  { title: "Video", href: "source", role: "user" },
 ];
 
 function Header(props) {
@@ -77,13 +78,21 @@ function Header(props) {
               <img src={logo} alt="logo header" className="appbar_image" />
             </Link>
 
-            <ul className="appbar__menu menu">
-              {pageMenus.map((pageMenu, index) => (
-                <Link to={pageMenu.href} key={index} className="menu__item">
-                  {pageMenu.title}
-                </Link>
-              ))}
-            </ul>
+            {!isLoggedIn && (
+              <Typography className="appbar__title">
+                NGÂN HÀNG TMCP ĐẦU TỪ VÀ PHÁT TRIỂN VIỆT NAM
+              </Typography>
+            )}
+
+            {isLoggedIn && (
+              <ul className="appbar__menu menu">
+                {pageMenus.map((pageMenu, index) => (
+                  <Link to={pageMenu.href} key={index} className="menu__item">
+                    {pageMenu.title}
+                  </Link>
+                ))}
+              </ul>
+            )}
 
             {!isLoggedIn && (
               <Button className="appbar__login" onClick={handleClickOpen}>

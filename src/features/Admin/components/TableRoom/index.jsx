@@ -109,6 +109,7 @@ function TableRooms(props) {
             fontSize: "0.8rem",
           },
           pageSizeOptions: [],
+          addRowPosition: "first",
         }}
       />
     </>

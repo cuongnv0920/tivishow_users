@@ -1,0 +1,40 @@
+.headTableInterest {
+  display: flex;
+  padding: 18px;
+  background-color: #fff;
+
+  &__title {
+    color: #00524e;
+    text-transform: uppercase;
+    font-weight: 600 !important;
+    font-family: "Muli", sans-serif !important;
+  }
+
+  &__form {
+    position: relative;
+    margin-left: 35px;
+  }
+
+  &__input input {
+    font-family: "Muli", sans-serif !important;
+    padding: 8px;
+  }
+
+  &__button {
+    margin: 0px 0px 0px 25px !important;
+    padding: 7px !important;
+    font-family: "Muli", sans-serif !important;
+    color: #00524e !important;
+    font-weight: 600 !important;
+    background-color: #daa520 !important;
+    border-radius: 4px !important;
+  }
+
+  &__progress {
+    position: absolute;
+    margin-bottom: 10px;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+}

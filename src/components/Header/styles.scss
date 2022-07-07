@@ -13,6 +13,15 @@
     max-width: 100px;
   }
 
+  &__title {
+    padding: 0px 20px;
+    flex-grow: 1 !important;
+    color: #00524e !important;
+    font-family: "Muli", sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 1.3rem !important;
+  }
+
   .menu {
     margin: 0;
     padding: 0 20px;

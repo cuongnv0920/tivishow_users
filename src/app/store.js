@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "../features/Auth/userSlice";
-import posterRducer from "../features/Poster/posterSlice";
+import posterReducer from "../features/Poster/posterSlice";
+import sourceReducer from "../features/Source/sourceSlice";
 
 const rootReducer = {
   user: userReducer,
-  poster: posterRducer,
+  poster: posterReducer,
+  source: sourceReducer,
 };
 
 const store = configureStore({

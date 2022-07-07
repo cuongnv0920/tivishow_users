@@ -4,6 +4,7 @@ import NativeSelect from "@mui/material/NativeSelect";
 import MaterialTable from "material-table";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import URL from "../../../../configs/api.conf";
 import amplitudeApi from "../../../../api/amplitudeApi";
 import "./styles.scss";
@@ -54,7 +55,7 @@ function TableAmplitude(props) {
     { title: "Chọn mã...", value: "" },
     { title: "USD", value: "USD" },
     { title: "USD(10-20)", value: "USD(10-20)" },
-    { title: "USD(1-2-5)", value: "USD(10-20)" },
+    { title: "USD(1-2-5)", value: "USD(1-2-5)" },
     { title: "EUR", value: "EUR" },
     { title: "GBP", value: "GBP" },
     { title: "HKD", value: "HKD" },
@@ -182,6 +183,9 @@ function TableAmplitude(props) {
           onRowAdd: onRowAdd,
           onRowUpdate: onRowUpdate,
         }}
+        icons={{
+          Add: () => <AddCircleIcon sx={{ color: "#daa520" }} />,
+        }}
         options={{
           tableLayout: "auto",
           actionsColumnIndex: -1,
@@ -199,7 +203,10 @@ function TableAmplitude(props) {
           rowStyle: {
             fontSize: "0.8rem",
           },
-          pageSizeOptions: [],
+          pageSizeOptions: [10, 20, 30, 50],
+          pageSize: 10,
+          paging: true,
+          addRowPosition: "first",
         }}
       />
     </>

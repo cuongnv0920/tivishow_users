@@ -1,5 +1,6 @@
 import {
   Box,
+  Chip,
   Table,
   TableBody,
   TableCell,
@@ -9,13 +10,16 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import Moment from "react-moment";
 import interestApi from "../../../../api/interestApi";
+import validApi from "../../../../api/validApi";
 import "./styles.scss";
 
 TableInterest.propTypes = {};
 
 function TableInterest(props) {
   const [rowData, setRowData] = useState([]);
+  const [valids, setValids] = useState([]);
 
   useEffect(() => {
     const fetchInterests = async () => {
@@ -26,12 +30,27 @@ function TableInterest(props) {
     fetchInterests();
   }, [rowData]);
 
+  useEffect(() => {
+    const fetchValid = async () => {
+      const valids = await validApi.getAll();
+
+      setValids(valids);
+    };
+    fetchValid();
+  }, [valids]);
+
   return (
     <Box className="interest">
       <div className="interest__title">
         <Typography className="interest__typography">
-          BẢNG LÃI SUẤT NIÊM YẾT
+          LÃI SUẤT TIỀN GỬI TIẾT KIỆM - HIỆU LỰC NGÀY:
         </Typography>
+
+        {valids.map((valid) => (
+          <Moment format="DD/MM/YYYY" className="interest__moment">
+            {valid.date}
+          </Moment>
+        ))}
       </div>
 
       <TableContainer>
@@ -42,9 +61,15 @@ function TableInterest(props) {
         >
           <TableHead className="interest__head headInterest">
             <TableRow className="headInterest__row">
-              <TableCell className="headInterest__cell">Kỳ hạn</TableCell>
-              <TableCell className="headInterest__cell">USD</TableCell>
-              <TableCell className="headInterest__cell">VND</TableCell>
+              <TableCell className="headInterest__cell">
+                Kỳ hạn<p>Tern</p>
+              </TableCell>
+              <TableCell className="headInterest__cell">
+                USD<p>% Năm</p>
+              </TableCell>
+              <TableCell className="headInterest__cell">
+                VND<p>% Năm</p>
+              </TableCell>
             </TableRow>
           </TableHead>
 
