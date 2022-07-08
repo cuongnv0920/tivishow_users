@@ -86,7 +86,7 @@ function ProductAds(props) {
 
       <Grid container sx={{ margin: "12px 16px" }}>
         <Grid item xs={12} md={12}>
-          <Button onClick={handleFullScreen}>
+          <Button onClick={handleFullScreen} title="Toàn màn hình">
             <FitScreenIcon sx={{ color: "#f50057" }} />
           </Button>
         </Grid>

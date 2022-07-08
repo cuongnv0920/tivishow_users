@@ -129,7 +129,7 @@ function TablePoster(props) {
       <MaterialTable
         title={
           <div className="headTable">
-            <Typography className="headTable__title">
+            <Typography variant="h6" className="headTable__title">
               DANH SÁCH POSTER
             </Typography>
           </div>

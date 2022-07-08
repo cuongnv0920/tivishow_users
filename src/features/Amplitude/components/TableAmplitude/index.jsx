@@ -165,6 +165,27 @@ function TableAmplitude(props) {
         return true;
       },
     },
+
+    {
+      title: "Trạng thai",
+      field: "status",
+      cellStyle: { whiteSpace: "nowrap" },
+      lookup: { enabled: "enabled", disabled: "disabled" },
+      render: (row) => (
+        <div
+          style={{ color: row.status === "enabled" ? "#2196f3" : "#f50057" }}
+        >
+          {row.status === "enabled" ? "enabled" : "disabled"}
+        </div>
+      ),
+
+      validate: (row) => {
+        if (row.status === undefined || row.status === "") {
+          return "Vui lòng chọn trạng thái.";
+        }
+        return true;
+      },
+    },
   ];
 
   return (
@@ -172,7 +193,7 @@ function TableAmplitude(props) {
       <MaterialTable
         title={
           <div className="headTable">
-            <Typography className="headTable__title">
+            <Typography variant="h6" className="headTable__title">
               BẢNG ĐIỀU CHỈNH BIÊN ĐỘ
             </Typography>
           </div>

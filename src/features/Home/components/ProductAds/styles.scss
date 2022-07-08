@@ -33,6 +33,7 @@
 
   &__icon {
     width: 5px !important;
+    border: none !important;
     flex-grow: 1;
     color: #fff;
   }
@@ -45,7 +46,7 @@
 
   &__today {
     padding: 10px;
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 8px 8px 0px 0px;
     border: none;
     background-color: #009688;
     display: flex;
