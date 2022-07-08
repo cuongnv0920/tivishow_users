@@ -19,9 +19,9 @@ import "./styles.scss";
 Header.propTypes = {};
 
 const pages = [
-  { title: "Quản trị", href: "admin", role: "admin" },
-  { title: "Biên độ", href: "amplitude", role: "admin" },
-  { title: "Lãi suất tại quầy", href: "interest", role: "admin" },
+  { title: "Quản lý user", href: "admin", role: "admin" },
+  { title: "Biên độ tỷ giá", href: "amplitude", role: "admin" },
+  { title: "Lãi suất tiền gửi", href: "interest", role: "admin" },
   { title: "Poster", href: "poster", role: "user" },
   { title: "Video", href: "source", role: "user" },
 ];
@@ -87,7 +87,12 @@ function Header(props) {
             {isLoggedIn && (
               <ul className="appbar__menu menu">
                 {pageMenus.map((pageMenu, index) => (
-                  <Link to={pageMenu.href} key={index} className="menu__item">
+                  <Link
+                    to={pageMenu.href}
+                    key={index}
+                    className="menu__item"
+                    title={pageMenu.title}
+                  >
                     {pageMenu.title}
                   </Link>
                 ))}
