@@ -18,7 +18,6 @@ function RegisterForm(props) {
       .string()
       .required("Vui lòng nhập địa chỉ email.")
       .email("Địa chỉ email không hợp lệ."),
-    room: yup.string().required("Vui lòng chọn Phòng/ Ban."),
     password: yup
       .string()
       .required("Vui lòng nhập mật khẩu người dùng.")
@@ -61,14 +60,12 @@ function RegisterForm(props) {
 
       <form onSubmit={form.handleSubmit(handleSubmit)}>
         <InputField name="email" label="Địa chỉ email" form={form} />
-
         <PasswordField name="password" label="Mật khẩu" form={form} />
         <PasswordField
           name="retypePassword"
           label="Xác nhận mật khẩu"
           form={form}
         />
-
         <Button
           type="submit"
           className="register__button"

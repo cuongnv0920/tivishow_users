@@ -47,8 +47,9 @@ function LoginForm(props) {
       <Typography className="login__title" component="h3" variant="h5">
         Đăng nhập
       </Typography>
+
       <form onSubmit={form.handleSubmit(handleSubmit)}>
-        <InputField name="username" label="Tên đăng nhập" form={form} />
+        <InputField name="username" label="Tên đăng nhập/ email" form={form} />
         <PasswordField name="password" label="Mật khẩu" form={form} />
         <Button
           type="submit"
