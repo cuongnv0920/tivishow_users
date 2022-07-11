@@ -32,14 +32,14 @@ function SourceFormAdd(props) {
   };
 
   return (
-    <div className="sourceForm">
-      {isSubmitting && <LinearProgress className="sourceForm__progress" />}
+    <div className="sourceFormAdd">
+      {isSubmitting && <LinearProgress className="sourceFormAdd__progress" />}
 
-      <Avatar className="sourceForm__avatar">
+      <Avatar className="sourceFormAdd__avatar">
         <AddCircleIcon />
       </Avatar>
 
-      <Typography component="h3" variant="h5" className="sourceForm__title">
+      <Typography component="h3" variant="h5" className="sourceFormAdd__title">
         Thêm Video
       </Typography>
 
@@ -53,7 +53,7 @@ function SourceFormAdd(props) {
 
         <label htmlFor="sourceUploadAdd">
           <Button
-            className="sourceForm__input"
+            className="sourceFormAdd__input"
             fullWidth
             variant="outlined"
             margin="normal"
@@ -70,14 +70,14 @@ function SourceFormAdd(props) {
           variant="outlined"
           fullWidth
           label="Mô tả"
-          className="sourceForm__input"
+          className="sourceFormAdd__input"
         />
 
         <Button
           type="submit"
           fullWidth
           size="large"
-          className="sourceForm__button"
+          className="sourceFormAdd__button"
           disabled={isSubmitting}
         >
           Lưu

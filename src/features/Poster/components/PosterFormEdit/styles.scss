@@ -1,4 +1,26 @@
-.posterForm {
+.posterFormEdit {
+  position: relative;
+
+  &__progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  &__avatar {
+    margin: 5px auto;
+    background-color: #daa520 !important;
+  }
+
+  &__title {
+    margin: 16px 0 !important;
+    text-align: center;
+    font-family: "Muli", sans-serif !important;
+    font-weight: 600 !important;
+    color: #00524e;
+  }
+
   &__label {
     margin-top: 10px;
     font-family: "Muli", sans-serif !important;
@@ -7,11 +29,22 @@
     color: #1c2e36 !important;
   }
 
+  &__input {
+    font-family: "Muli", sans-serif !important;
+    font-size: 1rem !important;
+    text-transform: none !important;
+  }
+
   &__radio {
     font-family: "Muli", sans-serif !important;
   }
 
-  &__input input {
-    padding: 18px 16px !important;
+  &__button {
+    background-color: #00524e !important;
+    color: #fff !important;
+    margin: 16px 0px !important;
+    font-family: "Muli", sans-serif !important;
+    font-size: 1rem !important;
+    text-transform: none !important;
   }
 }

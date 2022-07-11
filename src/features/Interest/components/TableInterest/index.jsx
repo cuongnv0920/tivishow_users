@@ -144,10 +144,10 @@ function TableInterest(props) {
 
           <TextField
             id="date"
+            size="small"
             label="Ngày hiệu lực"
             defaultValue={value}
             onChange={handleChange}
-            className="headTableInterest__input"
             {...register("valid")}
             type="date"
             InputLabelProps={{

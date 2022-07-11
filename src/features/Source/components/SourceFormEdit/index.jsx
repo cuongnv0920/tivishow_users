@@ -53,14 +53,14 @@ function SourceFormEdit(props) {
   };
 
   return (
-    <div className="sourceForm">
-      {isSubmitting && <LinearProgress className="sourceForm__progress" />}
+    <div className="sourceFormEdit">
+      {isSubmitting && <LinearProgress className="sourceFormEdit__progress" />}
 
-      <Avatar className="sourceForm__avatar">
+      <Avatar className="sourceFormEdit__avatar">
         <EditIcon />
       </Avatar>
 
-      <Typography component="h3" variant="h5" className="sourceForm__title">
+      <Typography component="h3" variant="h5" className="sourceFormEdit__title">
         Sửa Video
       </Typography>
 
@@ -74,7 +74,7 @@ function SourceFormEdit(props) {
 
         <label htmlFor="sourceUploadEdit">
           <Button
-            className="sourceForm__input"
+            className="sourceFormEdit__input"
             fullWidth
             variant="outlined"
             margin="normal"
@@ -86,20 +86,20 @@ function SourceFormEdit(props) {
         </label>
 
         <FormControl margin="normal">
-          <FormLabel className="sourceForm__label">Trạng Thái</FormLabel>
+          <FormLabel className="sourceFormEdit__label">Trạng Thái</FormLabel>
           <RadioGroup
             row
             {...register("status")}
             onChange={handleChangeChecked}
           >
             <FormControlLabel
-              className="sourceForm__radio"
+              className="sourceFormEdit__radio"
               value="enabled"
               control={<Radio />}
               label="enabled"
             />
             <FormControlLabel
-              className="sourceForm__radio"
+              className="sourceFormEdit__radio"
               value="disabled"
               control={<Radio />}
               label="disabled"
@@ -114,7 +114,7 @@ function SourceFormEdit(props) {
             variant="outlined"
             fullWidth
             label="Mô tả"
-            className="sourceForm__input"
+            className="sourceFormEdit__input"
             defaultValue={el.description}
             value={value}
             onChange={handleChangeValue}
@@ -125,7 +125,7 @@ function SourceFormEdit(props) {
           type="submit"
           fullWidth
           size="large"
-          className="posterForm__button"
+          className="posterFormEdit__button"
           disabled={isSubmitting}
         >
           Lưu
