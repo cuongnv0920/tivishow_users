@@ -32,7 +32,7 @@ const columns = [
     cellStyle: { whiteSpace: "nowrap" },
     render: () => <div>&#x272E;&#x272E;&#x272E;&#x272E;&#x272E;&#x272E;</div>,
     editComponent: (props) => (
-      <TextField
+      <input
         type="password"
         size="small"
         className="editComponentPassword"

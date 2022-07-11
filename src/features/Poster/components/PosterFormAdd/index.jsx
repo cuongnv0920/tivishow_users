@@ -32,14 +32,14 @@ function PosterFormAdd(props) {
   };
 
   return (
-    <div className="posterForm">
-      {isSubmitting && <LinearProgress className="posterForm__progress" />}
+    <div className="posterFormAdd">
+      {isSubmitting && <LinearProgress className="posterFormAdd__progress" />}
 
-      <Avatar className="posterForm__avatar">
+      <Avatar className="posterFormAdd__avatar">
         <AddCircleIcon />
       </Avatar>
 
-      <Typography component="h3" variant="h5" className="posterForm__title">
+      <Typography component="h3" variant="h5" className="posterFormAdd__title">
         Thêm Poster
       </Typography>
 
@@ -53,7 +53,7 @@ function PosterFormAdd(props) {
 
         <label htmlFor="posterUploadAdd">
           <Button
-            className="posterForm__input"
+            className="posterFormAdd__input"
             fullWidth
             variant="outlined"
             margin="normal"
@@ -70,14 +70,14 @@ function PosterFormAdd(props) {
           variant="outlined"
           fullWidth
           label="Mô tả"
-          className="posterForm__input"
+          className="posterFormAdd__input"
         />
 
         <Button
           type="submit"
           fullWidth
           size="large"
-          className="posterForm__button"
+          className="posterFormAdd__button"
           disabled={isSubmitting}
         >
           Lưu

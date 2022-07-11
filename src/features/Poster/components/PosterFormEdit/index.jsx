@@ -53,14 +53,14 @@ function PosterFormEdit(props) {
   };
 
   return (
-    <div className="posterForm">
-      {isSubmitting && <LinearProgress className="posterForm__progress" />}
+    <div className="posterFormEdit">
+      {isSubmitting && <LinearProgress className="posterFormEdit__progress" />}
 
-      <Avatar className="posterForm__avatar">
+      <Avatar className="posterFormEdit__avatar">
         <EditIcon />
       </Avatar>
 
-      <Typography component="h3" variant="h5" className="posterForm__title">
+      <Typography component="h3" variant="h5" className="posterFormEdit__title">
         Sửa Poster
       </Typography>
 
@@ -74,7 +74,7 @@ function PosterFormEdit(props) {
 
         <label htmlFor="posterUploadEdit">
           <Button
-            className="posterForm__input"
+            className="posterFormEdit__input"
             fullWidth
             variant="outlined"
             margin="normal"
@@ -86,20 +86,20 @@ function PosterFormEdit(props) {
         </label>
 
         <FormControl margin="normal">
-          <FormLabel className="posterForm__label">Trạng Thái</FormLabel>
+          <FormLabel className="posterFormEdit__label">Trạng Thái</FormLabel>
           <RadioGroup
             row
             {...register("status")}
             onChange={handleChangeChecked}
           >
             <FormControlLabel
-              className="posterForm__radio"
+              className="posterFormEdit__radio"
               value="enabled"
               control={<Radio />}
               label="enabled"
             />
             <FormControlLabel
-              className="posterForm__radio"
+              className="posterFormEdit__radio"
               value="disabled"
               control={<Radio />}
               label="disabled"
@@ -114,7 +114,7 @@ function PosterFormEdit(props) {
             variant="outlined"
             fullWidth
             label="Mô tả"
-            className="posterForm__input"
+            className="posterFormEdit__input"
             defaultValue={el.description}
             value={value}
             onChange={handleChangeValue}
@@ -125,7 +125,7 @@ function PosterFormEdit(props) {
           type="submit"
           fullWidth
           size="large"
-          className="posterForm__button"
+          className="posterFormEdit__button"
           disabled={isSubmitting}
         >
           Lưu

@@ -2,8 +2,8 @@
   font-family: "Material Icons";
   font-style: normal;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/materialicons/v94/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2)
-    format("woff2");
+  src: local("flUhRq6tzZclQEJ-Vdg-IuiaDsNc"),
+    url(../../../../fonts/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format("woff2");
 }
 
 .material-icons {
@@ -42,9 +42,14 @@
   }
 }
 
-.editComponentPassword input {
-  padding: 4.5px 8px !important;
+.editComponentPassword {
+  background-color: rgba(0, 0, 0, 0.06);
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 4.5px 8px;
+  max-width: 60%;
+  font-family: "Muli", sans-serif !important;
 }
-.editComponentPassword div {
-  border: 2px solid white !important;
+.editComponentPassword:focus {
+  outline: none;
 }
