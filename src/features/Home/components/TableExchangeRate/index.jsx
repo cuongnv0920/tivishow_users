@@ -57,8 +57,8 @@ function TableExchangeRate(props) {
     return {
       image: el.image,
       currency: el?.currency,
-      buyCash: el?.buyCash + amplitude?.buyCash || 0,
-      buyTransfer: el?.buyTransfer + amplitude?.buyTransfer || 0,
+      buyCash: el?.buyCash - amplitude?.buyCash || 0,
+      buyTransfer: el?.buyTransfer - amplitude?.buyTransfer || 0,
       selling: el?.selling + amplitude?.selling || 0,
       status: el.status,
     };
