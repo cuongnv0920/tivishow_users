@@ -108,7 +108,9 @@ function TableRooms(props) {
           rowStyle: {
             fontSize: "0.8rem",
           },
-          pageSizeOptions: [],
+          pageSizeOptions: [10, 20, 30, 50],
+          pageSize: 10,
+          paging: true,
           addRowPosition: "first",
         }}
       />
