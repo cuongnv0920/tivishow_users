@@ -65,6 +65,7 @@ function PosterFormAdd(props) {
         </label>
 
         <TextField
+          {...register("description")}
           name="description"
           margin="normal"
           variant="outlined"

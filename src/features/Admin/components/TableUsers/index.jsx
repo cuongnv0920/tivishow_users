@@ -1,4 +1,4 @@
-import { TextField, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import MaterialTable from "material-table";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
@@ -123,7 +123,10 @@ function TableUsers(props) {
             fontSize: "0.8rem",
           },
 
-          pageSizeOptions: [],
+          pageSizeOptions: [10, 20, 30, 50],
+          pageSize: 10,
+          paging: true,
+          addRowPosition: "first",
         }}
       />
     </>
