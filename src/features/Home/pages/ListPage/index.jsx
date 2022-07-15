@@ -9,6 +9,18 @@ import "./styles.scss";
 
 ListPage.propTypes = {};
 
+const slides = [
+  {
+    table: <TableExchangeRate />,
+    decription: "table exchange rate",
+  },
+
+  {
+    table: <TableInterest />,
+    decription: "table interest",
+  },
+];
+
 function ListPage(props) {
   return (
     <Box className="home">
@@ -17,8 +29,9 @@ function ListPage(props) {
           <Grid item xs={6} md={8} className="home__item">
             <Paper elevation={0} className="home__paper">
               <Slide>
-                <TableExchangeRate key={0} />
-                <TableInterest key={1} />
+                {slides.map((el, idx) => (
+                  <div key={idx}>{el.table}</div>
+                ))}
               </Slide>
             </Paper>
           </Grid>

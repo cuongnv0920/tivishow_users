@@ -1,3 +1,9 @@
+input[name="oldPassword"],
+input[name="password"],
+input[name="retypePassword"] {
+  padding: 16.5px 14px !important;
+}
+
 .setting {
   position: relative;
 
@@ -22,10 +28,16 @@
   }
 
   &__button {
+    padding: 8px 22px !important;
     background-color: #00524e !important;
     margin: 16px 0px !important;
     font-family: "Muli", sans-serif !important;
     font-size: 1rem !important;
     text-transform: none !important;
+    cursor: pointer !important;
+    border-radius: 4px !important;
+    line-height: 1.75 !important;
+    color: #fff !important;
+    font-weight: 500 !important;
   }
 }

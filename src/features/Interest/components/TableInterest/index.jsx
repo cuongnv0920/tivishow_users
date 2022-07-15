@@ -144,6 +144,7 @@ function TableInterest(props) {
 
           <TextField
             id="date"
+            variant="outlined"
             size="small"
             label="Ngày hiệu lực"
             defaultValue={value}
