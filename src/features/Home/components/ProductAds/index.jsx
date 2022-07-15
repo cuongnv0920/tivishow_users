@@ -29,7 +29,13 @@ function ProductAds(props) {
       setImages(posters);
     };
     fetchPosters();
-  }, [images]);
+
+    const intervalPoster = setInterval(() => {
+      fetchPosters();
+    }, 1000 * 60 * 15);
+
+    return () => clearInterval(intervalPoster);
+  }, []);
 
   useEffect(() => {
     const fetchSource = async () => {
@@ -38,7 +44,13 @@ function ProductAds(props) {
       setSources(sources);
     };
     fetchSource();
-  }, [sources]);
+
+    const intervalSource = setInterval(() => {
+      fetchSource();
+    }, 1000 * 60 * 15);
+
+    return () => clearInterval(intervalSource);
+  }, []);
 
   useEffect(() => {
     const fetchCalendar = async () => {

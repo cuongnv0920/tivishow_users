@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import exchangeRateApi from "../../../../api/exchangeRateApi";
-import interestApi from "../../../../api/interestApi";
 import amplitudeApi from "../../../../api/amplitudeApi";
 import URL from "../../../../configs/api.conf";
 import "./styles.scss";
@@ -20,7 +19,6 @@ TableExchangeRate.propTypes = {};
 function TableExchangeRate(props) {
   const [exchangeRates, setExchangeRates] = useState([]);
   const [amplitudes, setAmplitudes] = useState([]);
-  const [interests, setInterests] = useState([]);
 
   useEffect(() => {
     const fetchExchangeRate = async () => {
@@ -29,7 +27,13 @@ function TableExchangeRate(props) {
       setExchangeRates(exchangeRates);
     };
     fetchExchangeRate();
-  }, [exchangeRates]);
+
+    const intervalExchangeRate = setInterval(() => {
+      fetchExchangeRate();
+    }, 1000 * 60 * 5);
+
+    return () => clearInterval(intervalExchangeRate);
+  }, []);
 
   useEffect(() => {
     const fetchAmplitude = async () => {
@@ -39,15 +43,6 @@ function TableExchangeRate(props) {
     };
     fetchAmplitude();
   }, []);
-
-  useEffect(() => {
-    const fetchInterest = async () => {
-      const interests = await interestApi.getAll();
-
-      setInterests(interests);
-    };
-    fetchInterest();
-  }, [interests]);
 
   const result = exchangeRates.map(function (el) {
     const amplitude = amplitudes.filter(function (row) {
