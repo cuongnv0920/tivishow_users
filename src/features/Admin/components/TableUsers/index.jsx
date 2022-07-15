@@ -3,7 +3,6 @@ import MaterialTable from "material-table";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 import userApi from "../../../../api/userApi";
-
 import "./styles.scss";
 
 TableUsers.propTypes = {};

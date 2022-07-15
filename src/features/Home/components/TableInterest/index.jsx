@@ -1,6 +1,7 @@
 import {
   Box,
   Chip,
+  Stack,
   Table,
   TableBody,
   TableCell,
@@ -9,6 +10,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import CheckIcon from "@mui/icons-material/Check";
 import React, { useEffect, useState } from "react";
 import Moment from "react-moment";
 import interestApi from "../../../../api/interestApi";
@@ -41,17 +43,23 @@ function TableInterest(props) {
 
   return (
     <Box className="interest">
-      <div className="interest__title">
+      <Stack direction="row" spacing={2} className="interest__title">
         <Typography className="interest__typography">
-          LÃI SUẤT TIỀN GỬI TIẾT KIỆM - HIỆU LỰC NGÀY:
+          LÃI SUẤT TIỀN GỬI TIẾT KIỆM
         </Typography>
 
-        {valids.map((valid) => (
-          <Moment format="DD/MM/YYYY" className="interest__moment">
-            {valid.date}
-          </Moment>
-        ))}
-      </div>
+        <Chip
+          className="interest__chip"
+          color="success"
+          icon={<CheckIcon />}
+          variant="outlined"
+          label={valids.map((valid) => (
+            <Moment format="DD/MM/YYYY" className="interest__moment">
+              {valid.date}
+            </Moment>
+          ))}
+        />
+      </Stack>
 
       <TableContainer>
         <Table

@@ -114,7 +114,7 @@ function SourceFormEdit(props) {
             variant="outlined"
             fullWidth
             label="Mô tả"
-            className="sourceFormEdit__input"
+            id="sourceFormEdit__input"
             defaultValue={el.description}
             value={value}
             onChange={handleChangeValue}

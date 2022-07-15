@@ -114,7 +114,7 @@ function PosterFormEdit(props) {
             variant="outlined"
             fullWidth
             label="Mô tả"
-            className="posterFormEdit__input"
+            id="posterFormEdit__input"
             defaultValue={el.description}
             value={value}
             onChange={handleChangeValue}

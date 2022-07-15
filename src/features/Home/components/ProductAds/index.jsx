@@ -8,6 +8,7 @@ import { Zoom } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import posterApi from "../../../../api/posterApi";
 import sourceApi from "../../../../api/sourceApi";
+import calendarApi from "../../../../api/calendarApi";
 import Clock from "../../../../components/Clock";
 import URL from "../../../../configs/api.conf";
 import FitScreenIcon from "@mui/icons-material/FitScreen";
@@ -17,28 +18,9 @@ import "./styles.scss";
 ProductAds.propTypes = {};
 
 function ProductAds(props) {
-  const date = new Date();
   const [images, setImages] = useState([]);
   const [sources, setSources] = useState([]);
-
-  const today = (date) => {
-    switch (date.getDay()) {
-      case 0:
-        return "Chủ nhật";
-      case 1:
-        return "Thứ hai";
-      case 2:
-        return "Thứ ba";
-      case 3:
-        return "Thứ tư";
-      case 4:
-        return "Thứ năm";
-      case 5:
-        return "Thứ sáu";
-      case 6:
-        return "Thứ bảy";
-    }
-  };
+  const [calendars, setCalendars] = useState([]);
 
   useEffect(() => {
     const fetchPosters = async () => {
@@ -57,6 +39,15 @@ function ProductAds(props) {
     };
     fetchSource();
   }, [sources]);
+
+  useEffect(() => {
+    const fetchCalendar = async () => {
+      const calendars = await calendarApi.getAll();
+
+      setCalendars(calendars);
+    };
+    fetchCalendar();
+  }, []);
 
   const handleFullScreen = () => {
     if (screenfull.isEnabled) {
@@ -84,7 +75,7 @@ function ProductAds(props) {
         </Grid>
       </Grid>
 
-      <Grid container sx={{ margin: "8px 16px" }}>
+      <Grid container sx={{ margin: "6px 16px" }}>
         <Grid item xs={12} md={12}>
           <Button onClick={handleFullScreen} title="Toàn màn hình">
             <FitScreenIcon sx={{ color: "#f50057" }} />
@@ -112,25 +103,30 @@ function ProductAds(props) {
         </Grid>
 
         <Grid item xs={5} md={5}>
-          <div className="calendar">
-            <div className="calendar__today">
-              <FiberManualRecordIcon className="calendar__icon" />
-              <Typography className="calendar__typography">
-                {today(new Date())}
-              </Typography>
-              <FiberManualRecordIcon className="calendar__icon" />
-            </div>
-            <div className="calendar__box">
-              <div className="calendar__dd">
-                <Moment format="DD">{date}</Moment>
+          {calendars.map((calendar) => (
+            <div className="calendar">
+              <div className="calendar__today">
+                <FiberManualRecordIcon className="calendar__icon" />
+
+                <Typography className="calendar__typography">
+                  {calendar.today}
+                </Typography>
+
+                <FiberManualRecordIcon className="calendar__icon" />
               </div>
 
-              <div className="calendar__mm">
-                <span>THÁNG</span>&nbsp;
-                <Moment format="MM">{date}</Moment>
+              <div className="calendar__box">
+                <div className="calendar__dd">
+                  <Moment format="DD">{calendar.date}</Moment>
+                </div>
+
+                <div className="calendar__mm">
+                  <span>THÁNG</span>&nbsp;
+                  <Moment format="MM">{calendar.date}</Moment>
+                </div>
               </div>
             </div>
-          </div>
+          ))}
 
           <div className="clock">
             <Chip
