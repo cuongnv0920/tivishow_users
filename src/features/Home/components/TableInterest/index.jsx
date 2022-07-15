@@ -30,7 +30,13 @@ function TableInterest(props) {
       setRowData(interests);
     };
     fetchInterests();
-  }, [rowData]);
+
+    const intervalInterest = setInterval(() => {
+      fetchInterests();
+    }, 1000 * 60 * 5);
+
+    return () => clearInterval(intervalInterest);
+  }, []);
 
   useEffect(() => {
     const fetchValid = async () => {
@@ -39,7 +45,7 @@ function TableInterest(props) {
       setValids(valids);
     };
     fetchValid();
-  }, [valids]);
+  }, []);
 
   return (
     <Box className="interest">
