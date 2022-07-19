@@ -80,7 +80,7 @@ function Header(props) {
 
             {!isLoggedIn && (
               <Typography className="appbar__title">
-                NGÂN HÀNG TMCP ĐẦU TỪ VÀ PHÁT TRIỂN VIỆT NAM
+                NGÂN HÀNG TMCP ĐẦU TƯ VÀ PHÁT TRIỂN VIỆT NAM
               </Typography>
             )}
 

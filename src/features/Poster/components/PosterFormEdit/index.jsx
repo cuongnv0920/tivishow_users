@@ -22,13 +22,13 @@ PosterFormEdit.propTypes = {
 };
 
 function PosterFormEdit(props) {
-  const [checked, setChecked] = useState("enabled");
+  const rowData = JSON.parse(localStorage.getItem(StorageKeys.POSTER)) || [];
+
+  const [checked, setChecked] = useState(rowData[0]?.status);
   const [value, setValue] = useState();
 
   const { register, handleSubmit, formState } = useForm();
   const { isSubmitting } = formState;
-
-  const rowData = JSON.parse(localStorage.getItem(StorageKeys.POSTER)) || [];
 
   const onSubmit = async (form) => {
     const { onSubmit } = props;
@@ -90,6 +90,7 @@ function PosterFormEdit(props) {
           <RadioGroup
             row
             {...register("status")}
+            value={checked}
             onChange={handleChangeChecked}
           >
             <FormControlLabel

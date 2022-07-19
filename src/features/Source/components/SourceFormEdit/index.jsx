@@ -22,13 +22,13 @@ SourceFormEdit.propTypes = {
 };
 
 function SourceFormEdit(props) {
-  const [checked, setChecked] = useState("enabled");
+  const rowData = JSON.parse(localStorage.getItem(StorageKeys.SOURCE)) || [];
+
+  const [checked, setChecked] = useState(rowData[0]?.status);
   const [value, setValue] = useState();
 
   const { register, handleSubmit, formState } = useForm();
   const { isSubmitting } = formState;
-
-  const rowData = JSON.parse(localStorage.getItem(StorageKeys.SOURCE)) || [];
 
   const onSubmit = async (form) => {
     const { onSubmit } = props;
@@ -90,6 +90,7 @@ function SourceFormEdit(props) {
           <RadioGroup
             row
             {...register("status")}
+            value={checked}
             onChange={handleChangeChecked}
           >
             <FormControlLabel
