@@ -1,5 +1,6 @@
 import {
   Box,
+  Stack,
   Table,
   TableBody,
   TableCell,
@@ -30,7 +31,7 @@ function TableExchangeRate(props) {
 
     const intervalExchangeRate = setInterval(() => {
       fetchExchangeRate();
-    }, 1000 * 60 * 5);
+    }, 1000 * 60 * 1);
 
     return () => clearInterval(intervalExchangeRate);
   }, []);
@@ -65,10 +66,40 @@ function TableExchangeRate(props) {
         <Typography className="exchangeRate__typography">
           TỶ GIÁ NGOẠI TỆ - EXCHANGE RATES
         </Typography>
+
+        <Stack
+          direction="row"
+          spacing={1}
+          className="exchangeRate__notification notification"
+        >
+          {exchangeRates.map(
+            (notification, index) =>
+              index === 0 && (
+                <>
+                  <Typography className="notification__hourd">
+                    {"(Thời điểm thông báo: " + notification.notificationHourd}
+                  </Typography>
+
+                  <Typography className="notification__date">
+                    {"– " + notification.notificationDate + " –"}
+                  </Typography>
+
+                  <Typography className="notification__number">
+                    Lần thông báo thứ:
+                    <span style={{ color: "#f50057", fontWeight: 600 }}>
+                      {" " + notification.notificationNumber}
+                    </span>
+                    <span>{")"}</span>
+                  </Typography>
+                </>
+              )
+          )}
+        </Stack>
       </div>
 
-      <TableContainer>
+      <TableContainer sx={{ maxHeight: 500 }}>
         <Table
+          stickyHeader
           sx={{ minWidth: 650 }}
           aria-label="table exchange rate"
           className="exchangeRate__table"
