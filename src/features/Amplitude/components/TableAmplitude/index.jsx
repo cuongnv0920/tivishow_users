@@ -63,6 +63,7 @@ function TableAmplitude(props) {
     { title: "JPY", value: "JPY" },
     { title: "THB", value: "THB" },
     { title: "AUD", value: "AUD" },
+    { title: "CAD", value: "CAD" },
     { title: "SGD", value: "SGD" },
     { title: "SEK", value: "SEK" },
     { title: "LAK", value: "LAK" },

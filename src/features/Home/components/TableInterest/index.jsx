@@ -67,8 +67,9 @@ function TableInterest(props) {
         />
       </Stack>
 
-      <TableContainer>
+      <TableContainer sx={{ maxHeight: 500 }}>
         <Table
+          stickyHeader
           sx={{ minWidth: 650 }}
           aria-label="table interest"
           className="interest__table"
