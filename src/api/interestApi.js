@@ -16,6 +16,11 @@ const interestApi = {
     return axiosClient.put(url, data);
   },
 
+  updateValid(data) {
+    const url = `/api/interests/updateValid`;
+    return axiosClient.put(url, data);
+  },
+
   delete(id) {
     const url = `/api/interests/delete/${id}`;
     return axiosClient.delete(url);

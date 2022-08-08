@@ -14,14 +14,12 @@ import CheckIcon from "@mui/icons-material/Check";
 import React, { useEffect, useState } from "react";
 import Moment from "react-moment";
 import interestApi from "../../../../api/interestApi";
-import validApi from "../../../../api/validApi";
 import "./styles.scss";
 
 TableInterest.propTypes = {};
 
 function TableInterest(props) {
   const [rowData, setRowData] = useState([]);
-  const [valids, setValids] = useState([]);
 
   useEffect(() => {
     const fetchInterests = async () => {
@@ -38,15 +36,6 @@ function TableInterest(props) {
     return () => clearInterval(intervalInterest);
   }, []);
 
-  useEffect(() => {
-    const fetchValid = async () => {
-      const valids = await validApi.getAll();
-
-      setValids(valids);
-    };
-    fetchValid();
-  }, []);
-
   return (
     <Box className="interest">
       <Stack direction="row" spacing={2} className="interest__title">
@@ -59,11 +48,14 @@ function TableInterest(props) {
           color="success"
           icon={<CheckIcon />}
           variant="outlined"
-          label={valids.map((valid) => (
-            <Moment format="DD/MM/YYYY" className="interest__moment">
-              {valid.date}
-            </Moment>
-          ))}
+          label={rowData.map(
+            (row, index) =>
+              index === 0 && (
+                <Moment format="DD/MM/YYYY" className="interest__moment">
+                  {row.valid}
+                </Moment>
+              )
+          )}
         />
       </Stack>
 
