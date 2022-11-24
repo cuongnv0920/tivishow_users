@@ -30,7 +30,6 @@ function TableSource(props) {
   const handleSubmitAdd = async (data) => {
     try {
       await sourceApi.create(data);
-      console.log("data");
       setOpenAdd(false);
 
       enqueueSnackbar("Thêm mới thành công.", { variant: "success" });
@@ -121,7 +120,7 @@ function TableSource(props) {
 
   useEffect(() => {
     const fetchSources = async () => {
-      const sources = await sourceApi.getAll();
+      const { sources, count } = await sourceApi.getAll();
 
       setRowData(sources.map((source, idx) => ({ ...source, stt: idx + 1 })));
     };

@@ -67,7 +67,13 @@ function Header(props) {
     navigate("/", { replace: true });
   };
 
-  const pageMenus = pages.filter((page, _) => page.role === loggedInUser.role);
+  const pageMenus = (pages) => {
+    if (loggedInUser.role === "admin") {
+      return pages;
+    } else {
+      return pages.filter((page) => page.role === loggedInUser.role);
+    }
+  };
 
   return (
     <div>
@@ -86,7 +92,7 @@ function Header(props) {
 
             {isLoggedIn && (
               <ul className="appbar__menu menu">
-                {pageMenus.map((pageMenu, index) => (
+                {pageMenus(pages).map((pageMenu, index) => (
                   <Link
                     to={pageMenu.href}
                     key={index}

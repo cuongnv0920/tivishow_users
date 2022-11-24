@@ -14,38 +14,66 @@ import CheckIcon from "@mui/icons-material/Check";
 import React, { useEffect, useState } from "react";
 import Moment from "react-moment";
 import interestApi from "../../../../api/interestApi";
-import validApi from "../../../../api/validApi";
 import "./styles.scss";
+import { useSelector } from "react-redux";
+import { decrease, increase } from "../../homeSlice";
+import { useDispatch } from "react-redux";
 
 TableInterest.propTypes = {};
 
 function TableInterest(props) {
+  const dispatch = useDispatch();
+  const toogleNextPage = useSelector((state) => state.toogleNextPage);
+
   const [rowData, setRowData] = useState([]);
-  const [valids, setValids] = useState([]);
+  const [pagination, setPagination] = useState({
+    limit: 8,
+    page: 1,
+    count: 2,
+  });
+  const [filter, setFilter] = useState({
+    _page: 1,
+    count: 2,
+  });
 
   useEffect(() => {
     const fetchInterests = async () => {
-      const interests = await interestApi.getAll();
+      const { interests, paginations } = await interestApi.getAll(filter);
 
       setRowData(interests);
+      setPagination(paginations);
     };
     fetchInterests();
-
-    const intervalInterest = setInterval(() => {
-      fetchInterests();
-    }, 1000 * 60 * 5);
-
-    return () => clearInterval(intervalInterest);
-  }, []);
+  }, [filter]);
 
   useEffect(() => {
-    const fetchValid = async () => {
-      const valids = await validApi.getAll();
+    const timer = setInterval(() => {
+      const action = increase({
+        count: pagination.count + 1,
+        name: "interest",
+      });
 
-      setValids(valids);
-    };
-    fetchValid();
-  }, []);
+      dispatch(action);
+    }, 10000);
+
+    return () => clearInterval(timer);
+  });
+
+  useEffect(() => {
+    setFilter((prevFilter) => ({
+      ...prevFilter,
+      _page: toogleNextPage.page,
+    }));
+
+    if (toogleNextPage.page === pagination.count + 1) {
+      const action = decrease({
+        count: 0,
+        name: "exchangeRate",
+      });
+
+      dispatch(action);
+    }
+  }, [toogleNextPage.page]);
 
   return (
     <Box className="interest">
@@ -59,11 +87,14 @@ function TableInterest(props) {
           color="success"
           icon={<CheckIcon />}
           variant="outlined"
-          label={valids.map((valid) => (
-            <Moment format="DD/MM/YYYY" className="interest__moment">
-              {valid.date}
-            </Moment>
-          ))}
+          label={rowData.map(
+            (row, index) =>
+              index === 0 && (
+                <Moment format="DD/MM/YYYY" className="interest__moment">
+                  {row.valid}
+                </Moment>
+              )
+          )}
         />
       </Stack>
 

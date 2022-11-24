@@ -6,13 +6,23 @@ const interestApi = {
     return axiosClient.post(url, data);
   },
 
-  getAll(data) {
-    const url = "/api/interests/list";
+  getAll(params) {
+    const url = `/api/interests/list/${params._page}`;
+    return axiosClient.get(url, params);
+  },
+
+  getAllAdmin(data) {
+    const url = "/api/interests/adminList";
     return axiosClient.get(url, data);
   },
 
   update(data) {
     const url = `/api/interests/update/${data.id}`;
+    return axiosClient.put(url, data);
+  },
+
+  updateValid(data) {
+    const url = `/api/interests/updateValid`;
     return axiosClient.put(url, data);
   },
 

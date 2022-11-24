@@ -1,11 +1,10 @@
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Button, LinearProgress, TextField, Typography } from "@mui/material";
 import MaterialTable from "material-table";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
 import interestApi from "../../../../api/interestApi";
-import validApi from "../../../../api/validApi";
 import "./styles.scss";
 
 TableInterest.propTypes = {};
@@ -20,7 +19,7 @@ function TableInterest(props) {
 
   const onSubmit = async (data) => {
     try {
-      await validApi.create(data);
+      await interestApi.updateValid(data);
 
       enqueueSnackbar("Cập nhật thành công!", { variant: "success" });
     } catch (error) {
@@ -118,7 +117,7 @@ function TableInterest(props) {
 
   useEffect(() => {
     const fetchInterests = async () => {
-      const interests = await interestApi.getAll();
+      const interests = await interestApi.getAllAdmin();
 
       setRowData(
         interests.map((interest, idx) => ({ ...interest, stt: idx + 1 }))
@@ -131,7 +130,7 @@ function TableInterest(props) {
     <>
       <div className="headTableInterest">
         <Typography variant="h6" className="headTableInterest__title">
-          Bảng lãi suất tiền gửi thông thường
+          Bảng lãi suất tiền gửi
         </Typography>
 
         <form

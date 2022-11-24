@@ -19,40 +19,34 @@ ProductAds.propTypes = {};
 
 function ProductAds(props) {
   const [images, setImages] = useState([]);
-  const [sources, setSources] = useState([]);
+  const [source, setSource] = useState([]);
+  const [countSource, setCountSource] = useState(0);
   const [calendars, setCalendars] = useState([]);
+  const [next, setNext] = useState(0);
 
   useEffect(() => {
+    // get api image poster
     const fetchPosters = async () => {
       const posters = await posterApi.getAll();
 
       setImages(posters);
     };
     fetchPosters();
-
-    const intervalPoster = setInterval(() => {
-      fetchPosters();
-    }, 1000 * 60 * 15);
-
-    return () => clearInterval(intervalPoster);
   }, []);
 
   useEffect(() => {
+    // get api source video
     const fetchSource = async () => {
-      const sources = await sourceApi.getAll();
+      const { sources, count } = await sourceApi.getAll();
 
-      setSources(sources);
+      setSource([sources[next]]);
+      setCountSource(count);
     };
     fetchSource();
-
-    const intervalSource = setInterval(() => {
-      fetchSource();
-    }, 1000 * 60 * 15);
-
-    return () => clearInterval(intervalSource);
-  }, []);
+  }, [next]);
 
   useEffect(() => {
+    // get api calendar
     const fetchCalendar = async () => {
       const calendars = await calendarApi.getAll();
 
@@ -67,23 +61,31 @@ function ProductAds(props) {
     }
   };
 
+  const onEnded = () => {
+    if (next < countSource - 1) {
+      setNext(next + 1);
+    } else {
+      setNext(0);
+    }
+  };
+
   return (
     <Box>
       <Grid container>
         <Grid item xs={12} md={12}>
-          <video controls loop muted autoPlay={true} className="video">
-            {sources.map(
-              (source, idx) =>
-                source.status === "enabled" && (
-                  <source
-                    key={idx}
-                    className="video__source"
-                    src={URL.apiUrl + "/" + source.video}
-                    type={source.type}
-                  />
-                )
-            )}
-          </video>
+          {source.map(
+            (source, _) =>
+              source.status === "enabled" && (
+                <video
+                  controls
+                  muted
+                  autoPlay={true}
+                  onEnded={onEnded}
+                  className="video"
+                  src={URL.apiUrl + "/" + source.video}
+                />
+              )
+          )}
         </Grid>
       </Grid>
 
