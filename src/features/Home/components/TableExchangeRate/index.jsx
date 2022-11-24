@@ -10,31 +10,42 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import exchangeRateApi from "../../../../api/exchangeRateApi";
+import { useDispatch, useSelector } from "react-redux";
 import amplitudeApi from "../../../../api/amplitudeApi";
+import exchangeRateApi from "../../../../api/exchangeRateApi";
 import URL from "../../../../configs/api.conf";
+import { decrease, increase } from "../../homeSlice";
 import "./styles.scss";
 
 TableExchangeRate.propTypes = {};
 
 function TableExchangeRate(props) {
+  const dispatch = useDispatch();
+  const toogleNextPage = useSelector((state) => state.toogleNextPage);
+
   const [exchangeRates, setExchangeRates] = useState([]);
   const [amplitudes, setAmplitudes] = useState([]);
+  const [pagination, setPagination] = useState({
+    limit: 8,
+    page: 1,
+    count: 3,
+  });
+  const [filter, setFilter] = useState({
+    _page: 1,
+    _count: 3,
+  });
 
   useEffect(() => {
     const fetchExchangeRate = async () => {
-      const exchangeRates = await exchangeRateApi.getAll();
+      const { exchangeRates, paginations } = await exchangeRateApi.getAll(
+        filter
+      );
 
       setExchangeRates(exchangeRates);
+      setPagination(paginations);
     };
     fetchExchangeRate();
-
-    const intervalExchangeRate = setInterval(() => {
-      fetchExchangeRate();
-    }, 1000 * 60 * 1);
-
-    return () => clearInterval(intervalExchangeRate);
-  }, []);
+  }, [filter]);
 
   useEffect(() => {
     const fetchAmplitude = async () => {
@@ -59,6 +70,35 @@ function TableExchangeRate(props) {
       status: el.status,
     };
   });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const action = increase({
+        count: pagination.count + 1,
+        name: "exchangeRate",
+      });
+
+      dispatch(action);
+    }, 10000);
+
+    return () => clearInterval(timer);
+  });
+
+  useEffect(() => {
+    setFilter((prevFilter) => ({
+      ...prevFilter,
+      _page: toogleNextPage.page,
+    }));
+
+    if (toogleNextPage.page === pagination.count + 1) {
+      const action = decrease({
+        count: 0,
+        name: "interest",
+      });
+
+      dispatch(action);
+    }
+  }, [toogleNextPage]);
 
   return (
     <Box className="exchangeRate">

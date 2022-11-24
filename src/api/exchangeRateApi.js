@@ -6,9 +6,9 @@ const exchangeRateApi = {
     return axiosClient.post(url, data);
   },
 
-  getAll(data) {
-    const url = "/api/exchangeRates/list";
-    return axiosClient.get(url, data);
+  getAll(params) {
+    const url = `/api/exchangeRates/list/${params._page}`;
+    return axiosClient.get(url, params);
   },
 
   update(data) {

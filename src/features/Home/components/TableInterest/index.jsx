@@ -15,26 +15,65 @@ import React, { useEffect, useState } from "react";
 import Moment from "react-moment";
 import interestApi from "../../../../api/interestApi";
 import "./styles.scss";
+import { useSelector } from "react-redux";
+import { decrease, increase } from "../../homeSlice";
+import { useDispatch } from "react-redux";
 
 TableInterest.propTypes = {};
 
 function TableInterest(props) {
+  const dispatch = useDispatch();
+  const toogleNextPage = useSelector((state) => state.toogleNextPage);
+
   const [rowData, setRowData] = useState([]);
+  const [pagination, setPagination] = useState({
+    limit: 8,
+    page: 1,
+    count: 2,
+  });
+  const [filter, setFilter] = useState({
+    _page: 1,
+    count: 2,
+  });
 
   useEffect(() => {
     const fetchInterests = async () => {
-      const interests = await interestApi.getAll();
+      const { interests, paginations } = await interestApi.getAll(filter);
 
       setRowData(interests);
+      setPagination(paginations);
     };
     fetchInterests();
+  }, [filter]);
 
-    const intervalInterest = setInterval(() => {
-      fetchInterests();
-    }, 1000 * 60 * 5);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const action = increase({
+        count: pagination.count + 1,
+        name: "interest",
+      });
 
-    return () => clearInterval(intervalInterest);
-  }, []);
+      dispatch(action);
+    }, 10000);
+
+    return () => clearInterval(timer);
+  });
+
+  useEffect(() => {
+    setFilter((prevFilter) => ({
+      ...prevFilter,
+      _page: toogleNextPage.page,
+    }));
+
+    if (toogleNextPage.page === pagination.count + 1) {
+      const action = decrease({
+        count: 0,
+        name: "exchangeRate",
+      });
+
+      dispatch(action);
+    }
+  }, [toogleNextPage.page]);
 
   return (
     <Box className="interest">

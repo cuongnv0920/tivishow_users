@@ -11,22 +11,56 @@ import Source from "./features/Source";
 function App() {
   const loggedInUser = useSelector((state) => state.user.current);
 
-  const requireAuthUser = (path) =>
-    loggedInUser.role === "user" ? path : "/*";
+  const routes = [
+    {
+      path: "/*",
+      element: <Home />,
+      role: "user",
+    },
+    {
+      path: "admin/*",
+      element: <Admin />,
+      role: "admin",
+    },
+    {
+      path: "amplitude/*",
+      element: <Amplitude />,
+      role: "admin",
+    },
+    {
+      path: "interest/*",
+      element: <Interest />,
+      role: "admin",
+    },
+    {
+      path: "poster/*",
+      element: <Poster />,
+      role: "user",
+    },
+    {
+      path: "source/*",
+      element: <Source />,
+      role: "user",
+    },
+  ];
 
-  const requireAuthAdmin = (path) =>
-    loggedInUser.role === "admin" ? path : "/*";
+  const requireAuth = (routes) => {
+    if (loggedInUser.role === "admin") {
+      return routes;
+    } else if (loggedInUser.role === "user") {
+      return routes.filter((route) => route.role === loggedInUser.role);
+    } else if (!!loggedInUser.role === false) {
+      return routes.filter((route) => route.path === "/*");
+    }
+  };
 
   return (
     <div className="App">
       <Header />
       <Routes>
-        <Route path="/*" element={<Home />} />
-        <Route path={requireAuthAdmin("admin/*")} element={<Admin />} />
-        <Route path={requireAuthAdmin("amplitude/*")} element={<Amplitude />} />
-        <Route path={requireAuthAdmin("interest/*")} element={<Interest />} />
-        <Route path={requireAuthUser("poster/*")} element={<Poster />} />
-        <Route path={requireAuthUser("source/*")} element={<Source />} />
+        {requireAuth(routes).map((route, index) => (
+          <Route key={index} path={route.path} element={route.element} />
+        ))}
       </Routes>
     </div>
   );

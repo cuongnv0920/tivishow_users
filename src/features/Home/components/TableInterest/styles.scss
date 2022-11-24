@@ -1,4 +1,5 @@
 .interest {
+  cursor: grab;
   &__title {
     padding: 10px 0px 34px 0px;
     justify-content: center;
@@ -46,7 +47,7 @@
   }
 
   &__cell {
-    padding: 13px 16px !important;
+    padding: 12.9px 16px !important;
     font-family: "Muli", sans-serif !important;
     font-size: 1.2rem !important;
     font-weight: 600 !important;

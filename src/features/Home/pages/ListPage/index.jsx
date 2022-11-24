@@ -1,38 +1,52 @@
 import { Box, Grid, Paper } from "@mui/material";
 import { Container } from "@mui/system";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ProductAds from "../../components/ProductAds";
-import { Slide } from "react-slideshow-image";
 import TableExchangeRate from "../../components/TableExchangeRate";
 import TableInterest from "../../components/TableInterest";
 import "./styles.scss";
+import { useSelector } from "react-redux";
 
 ListPage.propTypes = {};
 
-const slides = [
-  {
-    table: <TableExchangeRate />,
-    decription: "table exchange rate",
-  },
-
-  {
-    table: <TableInterest />,
-    decription: "table interest",
-  },
-];
-
 function ListPage(props) {
+  const [slideComponent, setSlideComponent] = useState([
+    {
+      title: "table exchande rate",
+      component: <TableExchangeRate />,
+    },
+  ]);
+  const toogleNextPage = useSelector((state) => state.toogleNextPage);
+
+  useEffect(() => {
+    if (toogleNextPage.component.name === "interest") {
+      setSlideComponent([
+        {
+          title: "table interest",
+          component: <TableInterest />,
+        },
+      ]);
+    } else if (toogleNextPage.component.name === "exchangeRate") {
+      setSlideComponent([
+        {
+          title: "table exchande rate",
+          component: <TableExchangeRate />,
+        },
+      ]);
+    }
+  }, [toogleNextPage]);
+
   return (
     <Box className="home">
       <Container>
         <Grid container spacing={2} className="home__row">
           <Grid item xs={6} md={8} className="home__item">
             <Paper elevation={0} className="home__paper">
-              <Slide>
-                {slides.map((el, idx) => (
-                  <div key={idx}>{el.table}</div>
-                ))}
-              </Slide>
+              {slideComponent.map((el, idx) => (
+                <div className="home__component" key={idx}>
+                  {el.component}
+                </div>
+              ))}
             </Paper>
           </Grid>
 

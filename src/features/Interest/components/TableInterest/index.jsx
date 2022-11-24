@@ -117,7 +117,7 @@ function TableInterest(props) {
 
   useEffect(() => {
     const fetchInterests = async () => {
-      const interests = await interestApi.getAll();
+      const interests = await interestApi.getAllAdmin();
 
       setRowData(
         interests.map((interest, idx) => ({ ...interest, stt: idx + 1 }))
