@@ -26,6 +26,7 @@ function TableInterest(props) {
   const toogleNextPage = useSelector((state) => state.toogleNextPage);
 
   const [rowData, setRowData] = useState([]);
+  const [valid, setValid] = useState([]);
   const [pagination, setPagination] = useState({
     limit: 8,
     page: 1,
@@ -45,6 +46,16 @@ function TableInterest(props) {
     };
     fetchInterests();
   }, [filter]);
+
+  useEffect(() => {
+    const fetchValids = async () => {
+      const valids = await interestApi.getAllAdmin();
+
+      setValid(valids);
+    };
+
+    fetchValids();
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -87,7 +98,7 @@ function TableInterest(props) {
           color="success"
           icon={<CheckIcon />}
           variant="outlined"
-          label={rowData.map(
+          label={valid.map(
             (row, index) =>
               index === 0 && (
                 <Moment format="DD/MM/YYYY" className="interest__moment">
