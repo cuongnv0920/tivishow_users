@@ -1,5 +1,5 @@
 const configs = {
-  apiUrl: "http://localhost:7000",
+  apiUrl: "http://10.31.130.63:7000",
 };
 
 export default configs;
