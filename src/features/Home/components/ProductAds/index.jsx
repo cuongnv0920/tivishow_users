@@ -39,7 +39,7 @@ function ProductAds(props) {
     const fetchSource = async () => {
       const { sources, count } = await sourceApi.getAll();
 
-      setSource([sources[next]]);
+      setSource([sources[next] || {}]);
       setCountSource(count);
     };
     fetchSource();
