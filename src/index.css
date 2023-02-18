@@ -33,18 +33,152 @@
     U+FEFF, U+FFFD;
 }
 
+@font-face {
+  font-family: "Material Icons";
+  font-style: normal;
+  font-weight: 400;
+  src: local("flUhRq6tzZclQEJ-Vdg-IuiaDsNc"),
+    url(../src/fonts/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format("woff2");
+}
+
+/* style dialog material-ui */
+.dialogTitle {
+  margin: 18px 0px;
+  padding: 0px 8px;
+  border-left: 2px solid #f50057;
+  background-color: #f8f8f8;
+}
+.dialogTitle_content {
+  font-family: "Muli", sans-serif;
+  font-size: 1.3rem !important;
+  color: #1c2e36;
+}
+.dialogButtonCancel {
+  font-family: "Muli", sans-serif !important;
+  color: #1c2e36 !important;
+  font-weight: 600 !important;
+}
+.dialogButtonSave {
+  background: linear-gradient(45deg, #00e676 20%, #d1ff33 90%) !important;
+  margin: 16px 0px !important;
+  padding: 6px 16px !important;
+  font-family: "Muli", sans-serif !important;
+  font-size: 1.3rem !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  color: #f8f8f8;
+}
+.dialogButtonDelete {
+  background: linear-gradient(45deg, #ff3d00 20%, #ffcf33 90%) !important;
+  margin: 16px 0px !important;
+  padding: 6px 16px !important;
+  font-family: "Muli", sans-serif !important;
+  font-size: 1.3rem !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  color: #f8f8f8;
+}
+.dialogAction {
+  background-color: #f8f8f8;
+  border-top: 1.5px solid #daa520;
+}
+
 html {
   background-color: rgb(244, 244, 244);
 }
 
 body {
   margin: 0;
-  font-family: "Muli", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.main {
+  margin: 2rem 0;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+h4,
+h5,
+h6,
+a,
+li,
+button,
+input {
+  font-family: "Muli", sans-serif !important;
+  color: #1c2e36 !important;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Muli", sans-serif;
+  color: #00524e;
+}
+
+th,
+td {
+  font-family: "Muli", sans-serif !important;
+  color: #1c2e36 !important;
+}
+
+th {
+  font-weight: 600 !important;
+}
+
+p {
+  font-family: "Muli", sans-serif !important;
+  color: #4a6572;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+/* style news list */
+.title-news {
+  padding: 2px 16px;
+  border-left: 2px solid #daa520;
+}
+.image-hot {
+  width: 35px;
+  height: 16px;
+}
+.detail-featuredNews {
+  flex-grow: 1;
+}
+.detail-featuredNews:hover,
+.featured-download:hover {
+  color: #f50057 !important;
+}
+
+.detail-news {
+  flex-grow: 1;
+}
+.detail-news:hover,
+.news-download:hover {
+  color: #00a152 !important;
+}
+
+/* style scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #4a6572 !important;
+  border-radius: 8px;
 }

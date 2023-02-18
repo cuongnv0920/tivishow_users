@@ -1,17 +1,11 @@
 .home {
-  padding: 35px 0px;
-
-  &__row {
+  &__container {
     display: flex !important;
   }
 
   &__item {
     position: relative;
     flex: 1;
-  }
-
-  &__paper {
-    height: calc("100vh - 70px");
   }
 
   &__component {
