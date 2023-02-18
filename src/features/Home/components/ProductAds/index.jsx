@@ -1,17 +1,13 @@
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+import FitScreenIcon from "@mui/icons-material/FitScreen";
 import { Button, Chip, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { Clock } from "components/common";
 import { useEffect, useState } from "react";
 import "react-calendar/dist/Calendar.css";
 import Moment from "react-moment";
 import { Zoom } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
-import posterApi from "../../../../api/posterApi";
-import sourceApi from "../../../../api/sourceApi";
-import calendarApi from "../../../../api/calendarApi";
-import Clock from "../../../../components/Clock";
-import URL from "../../../../configs/api.conf";
-import FitScreenIcon from "@mui/icons-material/FitScreen";
 import screenfull from "screenfull";
 import "./styles.scss";
 
@@ -24,36 +20,35 @@ function ProductAds(props) {
   const [calendars, setCalendars] = useState([]);
   const [next, setNext] = useState(0);
 
-  useEffect(() => {
-    // get api image poster
-    const fetchPosters = async () => {
-      const posters = await posterApi.getAll();
+  // useEffect(() => {
+  //   const fetchPosters = async () => {
+  //     const posters = await posterApi.getAll();
 
-      setImages(posters);
-    };
-    fetchPosters();
-  }, []);
+  //     setImages(posters);
+  //   };
+  //   fetchPosters();
+  // }, []);
 
-  useEffect(() => {
-    // get api source video
-    const fetchSource = async () => {
-      const { sources, count } = await sourceApi.getAll();
+  // useEffect(() => {
+  //   // get api source video
+  //   const fetchSource = async () => {
+  //     const { sources, count } = await sourceApi.getAll();
 
-      setSource([sources[next] || {}]);
-      setCountSource(count);
-    };
-    fetchSource();
-  }, [next]);
+  //     setSource([sources[next] || {}]);
+  //     setCountSource(count);
+  //   };
+  //   fetchSource();
+  // }, [next]);
 
-  useEffect(() => {
-    // get api calendar
-    const fetchCalendar = async () => {
-      const calendars = await calendarApi.getAll();
+  // useEffect(() => {
+  //   // get api calendar
+  //   const fetchCalendar = async () => {
+  //     const calendars = await calendarApi.getAll();
 
-      setCalendars(calendars);
-    };
-    fetchCalendar();
-  }, []);
+  //     setCalendars(calendars);
+  //   };
+  //   fetchCalendar();
+  // }, []);
 
   const handleFullScreen = () => {
     if (screenfull.isEnabled) {
@@ -72,7 +67,7 @@ function ProductAds(props) {
   return (
     <Box>
       <Grid container>
-        <Grid item xs={12} md={12}>
+        {/* <Grid item xs={12} md={12}>
           {source.map(
             (source, _) =>
               source.status === "enabled" && (
@@ -86,7 +81,7 @@ function ProductAds(props) {
                 />
               )
           )}
-        </Grid>
+        </Grid> */}
       </Grid>
 
       <Grid container sx={{ margin: "6px 16px" }}>
@@ -98,7 +93,7 @@ function ProductAds(props) {
       </Grid>
 
       <Grid container spacing={1}>
-        <Grid item xs={7} md={7}>
+        {/* <Grid item xs={7} md={7}>
           <div className="poster">
             <Zoom scale={0.4}>
               {images.map(
@@ -114,7 +109,7 @@ function ProductAds(props) {
               )}
             </Zoom>
           </div>
-        </Grid>
+        </Grid> */}
 
         <Grid item xs={5} md={5}>
           {calendars.map((calendar) => (

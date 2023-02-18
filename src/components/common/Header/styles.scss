@@ -1,0 +1,50 @@
+.appbar {
+  background-color: #fff !important;
+  padding: 0 !important;
+  position: sticky !important;
+  top: 0 !important;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px -1px,
+    rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
+
+  &__toolbar {
+    min-height: 50px !important;
+  }
+
+  &__logo {
+    max-width: 100px;
+  }
+
+  &__title {
+    text-align: center;
+    flex-grow: 1;
+    color: #00524e !important;
+    font-weight: 600 !important;
+    font-family: "Muli", sans-serif !important;
+    font-size: 1.3rem !important;
+    text-transform: uppercase;
+  }
+
+  &__button {
+    border-radius: 100rem;
+    padding: 6px 12px;
+    font-family: "Muli", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: 0 0 6px 0 rgba(29, 4, 50, 0.5);
+    border: solid 2px transparent;
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, 0)
+      ),
+      linear-gradient(45deg, #4caf50, #ffcd38);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    box-shadow: 2px 1000px 1px #fff inset;
+    cursor: pointer;
+    transition: 0.3s all;
+  }
+
+  &__button:hover {
+    box-shadow: none;
+  }
+}

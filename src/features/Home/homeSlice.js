@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const toogleNextPage = createSlice({
-  name: "toogleNextPage",
+const homeClice = createSlice({
+  name: "home",
   initialState: {
     page: 1,
     component: {
@@ -23,7 +23,7 @@ const toogleNextPage = createSlice({
         return {
           page: state.page + 1,
           component: {
-            name: "interest",
+            name: "deposit",
             count: action.payload.count,
           },
         };
@@ -42,6 +42,6 @@ const toogleNextPage = createSlice({
   },
 });
 
-const { actions, reducer } = toogleNextPage;
+const { actions, reducer } = homeClice;
 export const { increase, decrease } = actions;
 export default reducer;

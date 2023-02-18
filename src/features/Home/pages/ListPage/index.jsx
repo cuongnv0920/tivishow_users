@@ -1,62 +1,59 @@
 import { Box, Grid, Paper } from "@mui/material";
-import { Container } from "@mui/system";
-import React, { useEffect, useState } from "react";
-import ProductAds from "../../components/ProductAds";
-import TableExchangeRate from "../../components/TableExchangeRate";
-import TableInterest from "../../components/TableInterest";
-import "./styles.scss";
+import Deposit from "features/Home/components/Deposit";
+import ExchangeRate from "features/Home/components/ExchangeRate";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import ProductAds from "../../components/ProductAds";
+import "./styles.scss";
 
 ListPage.propTypes = {};
 
 function ListPage(props) {
+  const autoNextPage = useSelector((state) => state.home);
   const [slideComponent, setSlideComponent] = useState([
     {
       title: "table exchande rate",
-      component: <TableExchangeRate />,
+      component: <ExchangeRate />,
     },
   ]);
-  const toogleNextPage = useSelector((state) => state.toogleNextPage);
 
   useEffect(() => {
-    if (toogleNextPage.component.name === "interest") {
+    if (autoNextPage.component.name === "interest") {
       setSlideComponent([
         {
-          title: "table interest",
-          component: <TableInterest />,
+          title: "table deposit",
+          component: <Deposit />,
         },
       ]);
-    } else if (toogleNextPage.component.name === "exchangeRate") {
+    } else if (autoNextPage.component.name === "exchangeRate") {
       setSlideComponent([
         {
           title: "table exchande rate",
-          component: <TableExchangeRate />,
+          component: <ExchangeRate />,
         },
       ]);
     }
-  }, [toogleNextPage]);
+  }, [autoNextPage]);
 
   return (
     <Box className="home">
-      <Container>
-        <Grid container spacing={2} className="home__row">
-          <Grid item xs={6} md={8} className="home__item">
-            <Paper elevation={0} className="home__paper">
-              {slideComponent.map((el, idx) => (
-                <div className="home__component" key={idx}>
-                  {el.component}
-                </div>
-              ))}
-            </Paper>
-          </Grid>
-
-          <Grid item xs={6} md={4} className="home__item">
-            <Paper elevation={0} className="home__paper">
-              <ProductAds />
-            </Paper>
-          </Grid>
+      <Grid container spacing={2} className="home__container">
+        <Grid item xs={12} md={8} sm={12} className="home__item">
+          <Paper elevation={0} className="home__paper">
+            {slideComponent.map((el, idx) => (
+              <div className="home__component" key={idx}>
+                {el.component}
+              </div>
+            ))}
+          </Paper>
         </Grid>
-      </Container>
+
+        <Grid item xs={12} md={4} sm={12} className="home__item">
+          <Paper elevation={0} className="home__paper">
+            <ProductAds />
+          </Paper>
+        </Grid>
+      </Grid>
     </Box>
   );
 }

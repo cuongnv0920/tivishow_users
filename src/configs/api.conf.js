@@ -1,5 +1,5 @@
-const configs = {
-  apiUrl: "http://localhost:7000",
+const api = {
+  URL: "http://localhost:5003",
 };
 
-export default configs;
+export default api;
