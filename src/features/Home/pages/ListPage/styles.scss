@@ -8,6 +8,10 @@
     flex: 1;
   }
 
+  &__paper {
+    min-height: 597px;
+  }
+
   &__component {
     transition: all 0.3s ease-in-out;
   }

@@ -1,29 +1,24 @@
 import {
   Box,
-  Chip,
-  Stack,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Typography,
 } from "@mui/material";
-import CheckIcon from "@mui/icons-material/Check";
-import React, { useEffect, useState } from "react";
-import Moment from "react-moment";
-import "./styles.scss";
-import { useSelector } from "react-redux";
-import { decrease, increase } from "../../homeSlice";
-import { useDispatch } from "react-redux";
 import { depositApi } from "api";
+import { useEffect, useState } from "react";
+import Moment from "react-moment";
+import { useDispatch, useSelector } from "react-redux";
+import { decrease, increase } from "../../homeSlice";
+import "./styles.scss";
 
 Deposit.propTypes = {};
 
 function Deposit(props) {
   const dispatch = useDispatch();
-  const autoNextPage = useSelector((state) => state.autoNextPage);
+  const autoNextPage = useSelector((state) => state.home);
   const [deposits, setDeposit] = useState([]);
   const [pagination, setPagination] = useState({
     limit: 8,
@@ -31,6 +26,7 @@ function Deposit(props) {
     page: 1,
   });
   const [filters, setFilters] = useState({
+    _limit: 8,
     _page: 1,
     _count: 2,
   });

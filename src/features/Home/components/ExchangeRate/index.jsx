@@ -26,6 +26,7 @@ function ExchangeRate(props) {
     page: 1,
   });
   const [filters, setFilters] = useState({
+    _limit: 8,
     _page: 1,
     _count: 3,
   });

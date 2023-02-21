@@ -22,6 +22,7 @@ import Register from "features/Auth/component/Register";
 import Setting from "features/Auth/component/Setting";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import logoHeader from "../../../images/logo-header.png";
@@ -29,12 +30,35 @@ import "./styles.scss";
 
 Header.propTypes = {};
 
+const menuList = [
+  {
+    name: "Tỷ giá",
+    href: "margin",
+    role: "admin",
+  },
+  {
+    name: "Lãi suất",
+    href: "deposit",
+    role: "admin",
+  },
+  {
+    name: "Video",
+    href: "film",
+    role: "admin",
+  },
+  {
+    name: "Poster",
+    href: "poster",
+    role: "admin",
+  },
+];
+
 export function Header(props) {
   const logged = useSelector((state) => state.auth.current);
   const isLogged = !!logged._id;
 
   const [openAuth, setOpenAuth] = useState(false);
-  const [openSetting, setOpenSetting] = useState(false);
+  const [openSettingUser, setOpenSettingUser] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const dispatch = useDispatch();
@@ -46,22 +70,26 @@ export function Header(props) {
     setOpenAuth(false);
   };
 
-  const handleCloseSetting = () => {
-    setOpenSetting(false);
+  const handleCloseSettingUser = () => {
+    setOpenSettingUser(false);
+  };
+
+  const handleOpenSettingUser = () => {
+    setOpenSettingUser(true);
+    setAnchorEl(null);
   };
 
   const handleOpenMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleCloseMenu = () => {
     setAnchorEl(null);
-
-    setOpenSetting(true);
   };
+
   const handleLogout = () => {
     const action = logout();
     dispatch(action);
-
     setAnchorEl(null);
   };
 
@@ -77,10 +105,25 @@ export function Header(props) {
               className="appbar__logo"
             />
           </a>
+          {!isLogged && (
+            <Typography className="appbar__title">
+              {`NGÂN HÀNG TMCP ĐẦU TƯ VÀ PHÁT TRIỂN VIỆT NAM - ${branch.name}`}
+            </Typography>
+          )}
 
-          <Typography className="appbar__title">
-            {`NGÂN HÀNG TMCP ĐẦU TƯ VÀ PHÁT TRIỂN VIỆT NAM - ${branch.name}`}
-          </Typography>
+          {isLogged && (
+            <ul className="appbar__menu menu">
+              {menuList.map((menu) => (
+                <NavLink
+                  to={menu.href}
+                  key={menu.name}
+                  className="menu__navLink"
+                >
+                  {menu.name}
+                </NavLink>
+              ))}
+            </ul>
+          )}
 
           {!isLogged && (
             <button onClick={handleOpenAuth} className="appbar__button">
@@ -134,7 +177,7 @@ export function Header(props) {
                 open={Boolean(anchorEl)}
                 onClose={handleCloseMenu}
               >
-                <MenuItem onClick={handleCloseMenu}>
+                <MenuItem onClick={handleOpenSettingUser}>
                   <ListItemIcon>
                     <Settings sx={{ color: "#00a152" }} fontSize="small" />
                   </ListItemIcon>
@@ -187,18 +230,21 @@ export function Header(props) {
       <Dialog
         fullWidth="xs"
         maxWidth="xs"
-        open={openSetting}
+        open={openSettingUser}
         onClose={(event, reason) => {
           if (reason !== "backdropClick") {
-            handleCloseSetting(event, reason);
+            handleCloseSettingUser(event, reason);
           }
         }}
       >
         <DialogContent>
-          <Setting closeDialog={handleCloseSetting} />
+          <Setting closeDialog={handleCloseSettingUser} />
         </DialogContent>
         <DialogActions className="dialogAction">
-          <Button className="dialogButtonCancel" onClick={handleCloseSetting}>
+          <Button
+            className="dialogButtonCancel"
+            onClick={handleCloseSettingUser}
+          >
             Thoát
           </Button>
         </DialogActions>

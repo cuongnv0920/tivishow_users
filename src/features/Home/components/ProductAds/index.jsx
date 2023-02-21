@@ -1,91 +1,30 @@
-import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import FitScreenIcon from "@mui/icons-material/FitScreen";
-import { Button, Chip, Grid, Typography } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import { Box } from "@mui/system";
-import { Clock } from "components/common";
-import { useEffect, useState } from "react";
 import "react-calendar/dist/Calendar.css";
-import Moment from "react-moment";
-import { Zoom } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import screenfull from "screenfull";
-import "./styles.scss";
+import Calendar from "./components/Calendar";
+import Film from "./components/Film";
+import Poster from "./components/Poster";
 
 ProductAds.propTypes = {};
 
 function ProductAds(props) {
-  const [images, setImages] = useState([]);
-  const [source, setSource] = useState([]);
-  const [countSource, setCountSource] = useState(0);
-  const [calendars, setCalendars] = useState([]);
-  const [next, setNext] = useState(0);
-
-  // useEffect(() => {
-  //   const fetchPosters = async () => {
-  //     const posters = await posterApi.getAll();
-
-  //     setImages(posters);
-  //   };
-  //   fetchPosters();
-  // }, []);
-
-  // useEffect(() => {
-  //   // get api source video
-  //   const fetchSource = async () => {
-  //     const { sources, count } = await sourceApi.getAll();
-
-  //     setSource([sources[next] || {}]);
-  //     setCountSource(count);
-  //   };
-  //   fetchSource();
-  // }, [next]);
-
-  // useEffect(() => {
-  //   // get api calendar
-  //   const fetchCalendar = async () => {
-  //     const calendars = await calendarApi.getAll();
-
-  //     setCalendars(calendars);
-  //   };
-  //   fetchCalendar();
-  // }, []);
-
   const handleFullScreen = () => {
     if (screenfull.isEnabled) {
       screenfull.toggle();
     }
   };
 
-  const onEnded = () => {
-    if (next < countSource - 1) {
-      setNext(next + 1);
-    } else {
-      setNext(0);
-    }
-  };
-
   return (
-    <Box>
+    <Box sx={{ borderRadius: "4px" }}>
       <Grid container>
-        {/* <Grid item xs={12} md={12}>
-          {source.map(
-            (source, _) =>
-              source.status === "enabled" && (
-                <video
-                  controls
-                  muted
-                  autoPlay={true}
-                  onEnded={onEnded}
-                  className="video"
-                  src={URL.apiUrl + "/" + source.video}
-                />
-              )
-          )}
-        </Grid> */}
+        <Film />
       </Grid>
 
-      <Grid container sx={{ margin: "6px 16px" }}>
-        <Grid item xs={12} md={12}>
+      <Grid container sx={{ margin: "16px" }}>
+        <Grid item xs={12} md={12} sm={12}>
           <Button onClick={handleFullScreen} title="Toàn màn hình">
             <FitScreenIcon sx={{ color: "#f50057" }} />
           </Button>
@@ -93,57 +32,12 @@ function ProductAds(props) {
       </Grid>
 
       <Grid container spacing={1}>
-        {/* <Grid item xs={7} md={7}>
-          <div className="poster">
-            <Zoom scale={0.4}>
-              {images.map(
-                (el, index) =>
-                  el.status === "enabled" && (
-                    <img
-                      key={index}
-                      className="poster__image"
-                      src={URL.apiUrl + "/" + el.image}
-                      alt="slide show"
-                    />
-                  )
-              )}
-            </Zoom>
-          </div>
-        </Grid> */}
+        <Grid item xs={7} md={7}>
+          <Poster />
+        </Grid>
 
         <Grid item xs={5} md={5}>
-          {calendars.map((calendar) => (
-            <div className="calendar">
-              <div className="calendar__today">
-                <FiberManualRecordIcon className="calendar__icon" />
-
-                <Typography className="calendar__typography">
-                  {calendar.today}
-                </Typography>
-
-                <FiberManualRecordIcon className="calendar__icon" />
-              </div>
-
-              <div className="calendar__box">
-                <div className="calendar__dd">
-                  <Moment format="DD">{calendar.date}</Moment>
-                </div>
-
-                <div className="calendar__mm">
-                  <span>THÁNG</span>&nbsp;
-                  <Moment format="MM">{calendar.date}</Moment>
-                </div>
-              </div>
-            </div>
-          ))}
-
-          <div className="clock">
-            <Chip
-              className="clock__chip"
-              label={<Clock />}
-              variant="outlined"
-            />
-          </div>
+          <Calendar />
         </Grid>
       </Grid>
     </Box>
