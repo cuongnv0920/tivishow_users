@@ -1,8 +1,6 @@
 .appbar {
   background-color: #fff !important;
   padding: 0 !important;
-  position: sticky !important;
-  top: 0 !important;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px -1px,
     rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
 
@@ -22,6 +20,10 @@
     font-family: "Muli", sans-serif !important;
     font-size: 1.3rem !important;
     text-transform: uppercase;
+  }
+
+  &__menu {
+    flex-grow: 1;
   }
 
   &__button {
@@ -46,5 +48,37 @@
 
   &__button:hover {
     box-shadow: none;
+  }
+}
+
+.menu {
+  margin: 0px;
+  padding: 0px 20px;
+
+  &__navLink {
+    position: relative;
+    margin-left: 5px;
+    padding: 13.4px 20px;
+    float: left;
+    color: #1c2e36;
+    font-size: 1rem;
+    font-weight: 600;
+    border-bottom: 3px solid transparent;
+    font-family: "Muli", sans-serif !important;
+    list-style: none;
+  }
+
+  &__navLink:hover {
+    border-color: #00524e;
+    background-color: #f8f8f8;
+    transition: 0, 3s all;
+    color: #00524e;
+  }
+
+  &__navLink.active {
+    border-color: #00524e;
+    background-color: #f8f8f8;
+    transition: 0, 3s all;
+    color: #00524e;
   }
 }

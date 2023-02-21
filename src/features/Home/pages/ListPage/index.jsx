@@ -1,9 +1,9 @@
 import { Box, Grid, Paper } from "@mui/material";
 import Deposit from "features/Home/components/Deposit";
 import ExchangeRate from "features/Home/components/ExchangeRate";
+import ProductAds from "features/Home/components/ProductAds";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import ProductAds from "../../components/ProductAds";
 import "./styles.scss";
 
 ListPage.propTypes = {};
@@ -18,7 +18,7 @@ function ListPage(props) {
   ]);
 
   useEffect(() => {
-    if (autoNextPage.component.name === "interest") {
+    if (autoNextPage.component.name === "deposit") {
       setSlideComponent([
         {
           title: "table deposit",

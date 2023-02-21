@@ -1,0 +1,41 @@
+.calendar {
+  height: 150px;
+  border-radius: 1rem;
+  border: 2px solid #333333;
+  box-shadow: 0 0 6px 0 rgba(29, 4, 50, 0.5);
+  border: solid 2px transparent;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0)
+    ),
+    linear-gradient(45deg, #4caf50, #ffcd38);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  box-shadow: 2px 1000px 1px #fff inset;
+
+  &__header {
+    border-bottom: solid 2px transparent;
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, 0)
+      ),
+      linear-gradient(45deg, #4caf50, #ffcd38);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    box-shadow: 2px 1000px 1px #fff inset;
+  }
+
+  &__header h3 {
+    margin: 10px 0px;
+    color: #333333;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+  }
+
+  &__content h1 {
+    margin: 8px 0px;
+    text-align: center;
+    font-size: 4rem;
+  }
+}

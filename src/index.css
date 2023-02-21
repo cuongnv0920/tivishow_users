@@ -41,6 +41,47 @@
     url(../src/fonts/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format("woff2");
 }
 
+.material-icons {
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+
+.MuiInputBase-input {
+  padding: 16.5px 14px !important;
+}
+
+/* style materil-table */
+.materialTableTitle {
+  padding: 0px 8px;
+  border-left: 2px solid #daa520;
+  background-color: #f8f8f8;
+}
+.materialTableTitle_content {
+  font-family: "Muli", sans-serif;
+  color: #00524e;
+  text-transform: uppercase;
+}
+.materialTableIconAdd,
+.materialTableIconDelete {
+  color: #f50057;
+}
+.materialTableIconEdit {
+  color: #2979ff;
+}
+.materialTableIconUpdate {
+  color: #4caf50;
+}
+
 /* style dialog material-ui */
 .dialogTitle {
   margin: 18px 0px;

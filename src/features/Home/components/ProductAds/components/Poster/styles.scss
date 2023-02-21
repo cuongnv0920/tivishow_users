@@ -1,0 +1,13 @@
+.default-nav {
+  display: none !important;
+}
+
+.poster {
+  overflow: hidden;
+
+  &__image {
+    width: 100%;
+    max-height: 310px;
+    border-radius: 4px;
+  }
+}

@@ -1,0 +1,10 @@
+.pageMargin {
+  &__item {
+    position: relative;
+  }
+
+  &__paper {
+    width: 100%;
+    position: absolute;
+  }
+}
