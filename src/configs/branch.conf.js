@@ -1,8 +1,9 @@
 const branch = {
-  name: "CN Nam Bình Dương",
-  address: "Số 10, Đại lộ Hữu Nghị, KCN VSIP1, TP.Thuận An, Tỉnh Bình Dương",
-  phone: "0274 - ",
-  location: "Bình Dương",
+  name: "CN Quận 7 Sài Gòn",
+  address:
+    "Số 38-40-42 Đường Nguyễn Thị Thập, Khu Dân Cư Him Lam, Phường Tân Hưng, Quận 7, TP.Hồ Chí Minh",
+  phone: "028 - ",
+  location: "TP.HCM",
 };
 
 export default branch;

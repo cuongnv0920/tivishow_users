@@ -16,37 +16,39 @@ export function SelectField(props) {
   const { control } = form;
 
   return (
-    <Controller
-      name={name}
-      control={control}
-      render={({
-        field: { onChange, onBlur, value, name },
-        fieldState: { invalid, error },
-      }) => (
-        <FormControl
-          error={invalid}
-          fullWidth
-          margin="normal"
-          variant="outlined"
-        >
-          <InputLabel htmlFor={name}>{label}</InputLabel>
-          <Select
-            labelId={name}
+    <div style={{ marginTop: "16px", marginBottom: "8px" }}>
+      <Controller
+        name={name}
+        control={control}
+        render={({
+          field: { onChange, onBlur, value, name },
+          fieldState: { invalid, error },
+        }) => (
+          <FormControl
+            error={invalid}
             fullWidth
-            label={label}
-            name={name}
-            error={error}
-            onChange={onChange}
-            onBlur={onBlur}
-            disabled={disabled}
-            value={value}
+            margin="normal"
+            variant="outlined"
           >
-            {children}
-          </Select>
+            <InputLabel htmlFor={name}>{label}</InputLabel>
+            <Select
+              labelId={name}
+              fullWidth
+              label={label}
+              name={name}
+              error={error}
+              onChange={onChange}
+              onBlur={onBlur}
+              disabled={disabled}
+              value={value}
+            >
+              {children}
+            </Select>
 
-          <FormHelperText>{error?.message}</FormHelperText>
-        </FormControl>
-      )}
-    ></Controller>
+            <FormHelperText>{error?.message}</FormHelperText>
+          </FormControl>
+        )}
+      />
+    </div>
   );
 }

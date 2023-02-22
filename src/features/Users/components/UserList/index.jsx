@@ -4,13 +4,12 @@ import {
   DialogActions,
   DialogContent,
   Typography,
-} from "@mui/material";
+} from "@material-ui/core";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-import UpdateIcon from "@material-ui/icons/Update";
-import { depositApi } from "api";
-import { removeSelected, selected } from "features/Deposit/depositSlice";
+import { userApi } from "api";
+import { removeSelected, selected } from "features/Users/userSlice";
 import MaterialTable from "material-table";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
@@ -19,9 +18,8 @@ import { useDispatch } from "react-redux";
 import Create from "../Create";
 import Delete from "../Delete";
 import Edit from "../Edit";
-import Effect from "../Effect";
 
-DepositList.propTypes = {};
+UserList.propTypes = {};
 
 const columns = [
   {
@@ -30,28 +28,34 @@ const columns = [
     editable: "never",
   },
   {
-    title: "Kỳ hạn",
-    field: "term",
+    title: "Họ và tên",
+    field: "fullName",
     cellStyle: { whiteSpace: "nowrap" },
   },
   {
-    title: "VND",
-    field: "vnd",
+    title: "Địa chỉ email",
+    field: "email",
     cellStyle: { whiteSpace: "nowrap" },
   },
   {
-    title: "USD",
-    field: "usd",
+    title: "Phòng/ ban",
+    field: "room.name",
     cellStyle: { whiteSpace: "nowrap" },
   },
   {
-    title: "Online",
-    field: "online",
+    title: "Chức danh",
+    field: "level.name",
     cellStyle: { whiteSpace: "nowrap" },
   },
   {
-    title: "Số sắp xếp",
-    field: "sort",
+    title: "Nhóm quyền",
+    field: "role",
+    cellStyle: { whiteSpace: "nowrap" },
+  },
+  {
+    title: "Ngày sinh nhật",
+    field: "birthday",
+    render: (row) => <Moment format="DD/MM/YYYY">{row.birthday}</Moment>,
     cellStyle: { whiteSpace: "nowrap" },
   },
   {
@@ -62,11 +66,10 @@ const columns = [
   },
 ];
 
-function DepositList(props) {
+function UserList(props) {
   const [openDialogCreate, setOpenDialogCreate] = useState(false);
   const [openDialogEdit, setOpenDialogEdit] = useState(false);
   const [openDialogDelete, setOpenDialogDelete] = useState(false);
-  const [openDialogEffect, setOpenDialogEffect] = useState(false);
   const [onSelected, setOnSelected] = useState();
   const [rowData, setRowData] = useState([]);
   const dispatch = useDispatch();
@@ -80,18 +83,9 @@ function DepositList(props) {
     setOpenDialogCreate(true);
   };
 
-  const handleOpenDialogEffect = () => {
-    setOpenDialogEffect(true);
-  };
-
-  const handleCloseDialogEffect = () => {
-    setOpenDialogEffect(false);
-  };
-
   const handleCloseDialogEdit = async () => {
     const action = removeSelected();
     await dispatch(action);
-
     setOpenDialogEdit(false);
   };
 
@@ -118,19 +112,17 @@ function DepositList(props) {
     } else {
       const action = selected(onSelected[0]);
       await dispatch(action);
+
       setOpenDialogDelete(true);
     }
   };
 
   useEffect(() => {
-    const fetchDeposits = async () => {
-      const { deposits } = await depositApi.getAll({ _limit: 0 });
-
-      setRowData(
-        deposits.map((deposit, index) => ({ ...deposit, stt: index + 1 }))
-      );
+    const fetchUsers = async () => {
+      const users = await userApi.getAll();
+      setRowData(users.map((user, index) => ({ ...user, stt: index + 1 })));
     };
-    fetchDeposits();
+    fetchUsers();
   }, [openDialogCreate, openDialogEdit, openDialogDelete]);
 
   return (
@@ -139,7 +131,7 @@ function DepositList(props) {
         title={
           <div className="materialTableTitle">
             <Typography className="materialTableTitle_content" variant="h6">
-              Bảng lãi suất tiền gửi
+              Danh sách người dùng
             </Typography>
           </div>
         }
@@ -149,24 +141,18 @@ function DepositList(props) {
         actions={[
           {
             icon: () => <AddCircleIcon className="materialTableIconAdd" />,
-            tooltip: "Thêm biên độ tỷ giá",
+            tooltip: "Thêm người dùng",
             isFreeAction: true,
             onClick: handleOpenDialogCreate,
           },
           {
-            icon: () => <UpdateIcon className="materialTableIconUpdate" />,
-            tooltip: "Cập nhật ngày hiệu lực",
-            isFreeAction: true,
-            onClick: handleOpenDialogEffect,
-          },
-          {
             icon: () => <DeleteIcon className="materialTableIconDelete" />,
-            tooltip: "Xóa biên độ tỷ giá",
+            tooltip: "Xóa người dùng",
             onClick: onRowDelete,
           },
           {
             icon: () => <EditIcon className="materialTableIconEdit" />,
-            tooltip: "Sửa biên độ tỷ giá",
+            tooltip: "Sửa người dùng",
             onClick: onRowUpdate,
           },
         ]}
@@ -194,8 +180,8 @@ function DepositList(props) {
       />
 
       <Dialog
-        maxWidth="xs"
-        fullWidth="xs"
+        maxWidth="md"
+        fullWidth="md"
         open={openDialogCreate}
         onClose={(event, reason) => {
           if (reason !== "backdropClick") {
@@ -218,8 +204,8 @@ function DepositList(props) {
       </Dialog>
 
       <Dialog
-        maxWidth="xs"
-        fullWidth="xs"
+        maxWidth="md"
+        fullWidth="md"
         open={openDialogEdit}
         onClose={(event, reason) => {
           if (reason !== "backdropClick") {
@@ -242,7 +228,7 @@ function DepositList(props) {
       </Dialog>
 
       <Dialog
-        maxWidth="sm"
+        maxWidth="md"
         open={openDialogDelete}
         onClose={(event, reason) => {
           if (reason !== "backdropClick") {
@@ -263,32 +249,8 @@ function DepositList(props) {
           </Button>
         </DialogActions>
       </Dialog>
-
-      <Dialog
-        fullWidth="xs"
-        maxWidth="xs"
-        open={openDialogEffect}
-        onClose={(event, reason) => {
-          if (reason !== "backdropClick") {
-            handleCloseDialogEffect(event, reason);
-          }
-        }}
-      >
-        <DialogContent>
-          <Effect closeDialog={handleCloseDialogEffect} />
-        </DialogContent>
-
-        <DialogActions className="dialogAction">
-          <Button
-            className="dialogButtonCancel"
-            onClick={handleCloseDialogEffect}
-          >
-            Thoát
-          </Button>
-        </DialogActions>
-      </Dialog>
     </>
   );
 }
 
-export default DepositList;
+export default UserList;

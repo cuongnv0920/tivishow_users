@@ -16,28 +16,30 @@ export function InputField(props) {
   const { control } = form;
 
   return (
-    <Controller
-      name={name}
-      control={control}
-      render={({
-        field: { onChange, onBlur, value, name },
-        fieldState: { invalid, error },
-      }) => (
-        <TextField
-          margin="normal"
-          variant="outlined"
-          fullWidth
-          label={label}
-          error={invalid}
-          helperText={error?.message}
-          onChange={onChange}
-          onBlur={onBlur}
-          name={name}
-          value={value}
-          disabled={disabled}
-          inputProps={inputProps}
-        />
-      )}
-    ></Controller>
+    <div style={{ marginTop: "16px", marginBottom: "8px" }}>
+      <Controller
+        name={name}
+        control={control}
+        render={({
+          field: { onChange, onBlur, value, name },
+          fieldState: { invalid, error },
+        }) => (
+          <TextField
+            margin="normal"
+            variant="outlined"
+            fullWidth
+            label={label}
+            error={invalid}
+            helperText={error?.message}
+            onChange={onChange}
+            onBlur={onBlur}
+            name={name}
+            value={value}
+            disabled={disabled}
+            inputProps={inputProps}
+          />
+        )}
+      ></Controller>
+    </div>
   );
 }

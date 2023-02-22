@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, CircularProgress, Typography } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import { InputField, PasswordField } from "components/inputField";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";

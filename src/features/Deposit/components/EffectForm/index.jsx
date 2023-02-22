@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, CircularProgress, Typography } from "@material-ui/core";
+import { Button, CircularProgress, Typography } from "@mui/material";
 import { DateField } from "components/inputField";
 import PropTypes from "prop-types";
 import React from "react";
@@ -51,7 +51,7 @@ function EffectForm(props) {
       <form onSubmit={form.handleSubmit(handleSubmit)}>
         <DateField
           name="effect"
-          format="dd/MM/yyyy"
+          inputFormat="DD/MM/YYYY"
           lable="Ngày hiệu lực"
           value={effect}
           onChange={handleEffectChange}
