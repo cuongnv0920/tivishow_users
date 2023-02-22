@@ -51,6 +51,11 @@ const menuList = [
     href: "poster",
     role: "admin",
   },
+  {
+    name: "Người dùng",
+    href: "user",
+    role: "admin",
+  },
 ];
 
 export function Header(props) {

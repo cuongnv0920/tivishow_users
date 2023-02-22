@@ -1,4 +1,3 @@
-import { Box } from "@mui/system";
 import { posterApi } from "api";
 import api from "configs/api.conf";
 import { useEffect, useState } from "react";
@@ -16,8 +15,13 @@ function Poster(props) {
       const posters = await posterApi.getAll();
       setPosters(posters);
     };
-    fetchPosters();
-  });
+
+    const timer = setTimeout(() => {
+      fetchPosters();
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [posters]);
 
   return (
     <div className="poster">

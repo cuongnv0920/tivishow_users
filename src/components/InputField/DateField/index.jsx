@@ -20,29 +20,31 @@ export function DateField(props) {
   const { control } = form;
 
   return (
-    <Controller
-      name={name}
-      control={control}
-      render={({
-        field: { onChange, onBlur, value, name },
-        fieldState: { invalid, error },
-      }) => (
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DesktopDatePicker
-            variant="inline"
-            inputFormat={inputFormat}
-            label={lable}
-            value={value}
-            onChange={onChange}
-            onBlur={onBlur}
-            name={name}
-            disabled={disabled}
-            renderInput={(params) => (
-              <TextField margin="normal" fullWidth {...params} />
-            )}
-          />
-        </LocalizationProvider>
-      )}
-    />
+    <div style={{ marginTop: "16px", marginBottom: "8px" }}>
+      <Controller
+        name={name}
+        control={control}
+        render={({
+          field: { onChange, onBlur, value, name },
+          fieldState: { invalid, error },
+        }) => (
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DesktopDatePicker
+              variant="inline"
+              inputFormat={inputFormat}
+              label={lable}
+              value={value}
+              onChange={onChange}
+              onBlur={onBlur}
+              name={name}
+              disabled={disabled}
+              renderInput={(params) => (
+                <TextField margin="normal" fullWidth {...params} />
+              )}
+            />
+          </LocalizationProvider>
+        )}
+      />
+    </div>
   );
 }

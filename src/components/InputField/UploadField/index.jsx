@@ -16,30 +16,32 @@ export function UploadField(props) {
   const { control } = form;
 
   return (
-    <Controller
-      name={name}
-      control={control}
-      render={({
-        field: { onChange, onBlur, value, name },
-        fieldState: { invalid, error },
-      }) => (
-        <TextField
-          InputLabelProps={{
-            shrink: true,
-          }}
-          type="file"
-          margin="normal"
-          variant="outlined"
-          fullWidth
-          label={label}
-          error={invalid}
-          helperText={error?.message}
-          onChange={(event) => onChange(event.target.files[0])}
-          onBlur={onBlur}
-          disabled={disabled}
-          name={name}
-        />
-      )}
-    />
+    <div style={{ marginTop: "16px", marginBottom: "8px" }}>
+      <Controller
+        name={name}
+        control={control}
+        render={({
+          field: { onChange, onBlur, value, name },
+          fieldState: { invalid, error },
+        }) => (
+          <TextField
+            InputLabelProps={{
+              shrink: true,
+            }}
+            type="file"
+            margin="normal"
+            variant="outlined"
+            fullWidth
+            label={label}
+            error={invalid}
+            helperText={error?.message}
+            onChange={(event) => onChange(event.target.files[0])}
+            onBlur={onBlur}
+            disabled={disabled}
+            name={name}
+          />
+        )}
+      />
+    </div>
   );
 }

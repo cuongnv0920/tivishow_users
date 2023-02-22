@@ -1,0 +1,20 @@
+.deleteUser {
+  position: relative;
+
+  &__progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  &__content {
+    display: flex;
+  }
+
+  &__content p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #1c2e36;
+  }
+}
