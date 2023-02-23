@@ -32,7 +32,7 @@ export function PasswordField(props) {
   };
 
   return (
-    <div style={{ marginTop: "16px", marginBottom: "8px" }}>
+    <div style={{ margin: "8px 0px" }}>
       <Controller
         id={name}
         name={name}

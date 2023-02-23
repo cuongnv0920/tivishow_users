@@ -1,8 +1,9 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, CircularProgress } from "@mui/material";
+import { Avatar, Button, CircularProgress } from "@mui/material";
 import { InputField, PasswordField } from "components/inputField";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
 import * as yup from "yup";
 
 LoginForm.propTypes = {
@@ -35,6 +36,9 @@ function LoginForm(props) {
 
   return (
     <div className="login">
+      <Avatar sx={{ margin: "0 auto", backgroundColor: "#f50057" }}>
+        <LockOpenIcon />
+      </Avatar>
       <form onSubmit={form.handleSubmit(handleSubmit)}>
         <InputField name="username" label="Tên đăng nhập" form={form} />
         <PasswordField name="password" label="Mật khẩu" form={form} />

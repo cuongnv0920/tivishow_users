@@ -5,7 +5,6 @@ import filmReducer from "../features/Film/filmSlice";
 import posterReducer from "../features/Poster/posterSlice";
 import marginReducer from "../features/Margin/marginSlice";
 import depositReducer from "../features/Deposit/depositSlice";
-import userReducer from "../features/Users/userSlice";
 
 const rootReducer = {
   home: homeReducer,
@@ -14,7 +13,6 @@ const rootReducer = {
   poster: posterReducer,
   margin: marginReducer,
   deposit: depositReducer,
-  user: userReducer,
 };
 
 const store = configureStore({

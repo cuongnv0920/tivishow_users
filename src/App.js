@@ -5,7 +5,6 @@ import Film from "features/Film";
 import Home from "features/Home";
 import Margin from "features/Margin";
 import Poster from "features/Poster";
-import User from "features/Users";
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 
@@ -36,11 +35,6 @@ function App() {
     {
       path: "deposit/*",
       element: <Deposit />,
-      role: "admin",
-    },
-    {
-      path: "user/*",
-      element: <User />,
       role: "admin",
     },
   ];

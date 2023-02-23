@@ -4,12 +4,15 @@ import ExchangeRate from "features/Home/components/ExchangeRate";
 import ProductAds from "features/Home/components/ProductAds";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Cookies from "js-cookie";
 import "./styles.scss";
 
 ListPage.propTypes = {};
 
 function ListPage(props) {
   const autoNextPage = useSelector((state) => state.home);
+  const getCookie = Cookies.get("Deposit");
+  const cookied = !getCookie;
   const [slideComponent, setSlideComponent] = useState([
     {
       title: "table exchande rate",
@@ -18,7 +21,7 @@ function ListPage(props) {
   ]);
 
   useEffect(() => {
-    if (autoNextPage.component.name === "deposit") {
+    if (autoNextPage.component.name === "deposit" && !!cookied) {
       setSlideComponent([
         {
           title: "table deposit",

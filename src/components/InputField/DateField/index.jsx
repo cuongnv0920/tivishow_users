@@ -20,7 +20,7 @@ export function DateField(props) {
   const { control } = form;
 
   return (
-    <div style={{ marginTop: "16px", marginBottom: "8px" }}>
+    <div style={{ margin: "8px 0px" }}>
       <Controller
         name={name}
         control={control}

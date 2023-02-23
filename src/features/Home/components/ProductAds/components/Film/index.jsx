@@ -42,17 +42,20 @@ function Film(props) {
   }, [filters]);
 
   return (
-    <Grid item xs={12} md={12} sm={12} sx={{ height: "210px" }}>
-      {films.map((film) => (
-        <video
-          style={{ width: "100%", borderRadius: "4px" }}
-          controls
-          muted
-          autoPlay={true}
-          src={api.URL + "/" + film.path}
-          onEnded={onEnded}
-        />
-      ))}
+    <Grid item xs={12} md={12} sm={12} sx={{ minHeight: "210px" }}>
+      {films.map(
+        (film) =>
+          film.status === true && (
+            <video
+              style={{ width: "100%", borderRadius: "4px" }}
+              controls
+              muted
+              autoPlay={true}
+              src={api.URL + "/" + film.path}
+              onEnded={onEnded}
+            />
+          )
+      )}
     </Grid>
   );
 }
